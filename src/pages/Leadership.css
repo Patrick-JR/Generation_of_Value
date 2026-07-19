@@ -1,0 +1,664 @@
+/* Leadership Page */
+.leadership-page {
+  padding-top: 70px;
+}
+
+/* Hero */
+.leadership-hero {
+  position: relative;
+  height: 350px;
+  display: flex;
+  align-items: center;
+}
+
+.leadership-hero .hero-bg {
+  position: absolute;
+  inset: 0;
+}
+
+.leadership-hero .hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.leadership-hero .hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0,0,0,0.9), rgba(0,0,0,0.7));
+}
+
+.leadership-hero .hero-content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  padding: 2rem;
+}
+
+.leadership-hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.5rem, 6vw, 3.5rem);
+  color: var(--white);
+  margin-bottom: 0.5rem;
+}
+
+.leadership-hero p {
+  font-size: 1.1rem;
+  color: var(--gold);
+}
+
+/* Bishop Section */
+.bishop-section {
+  background: linear-gradient(135deg, var(--gray-900), var(--gray-800));
+  padding: 5rem 0;
+}
+
+.bishop-profile {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.bishop-image {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.bishop-image img {
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 5px solid var(--gold);
+  position: relative;
+  z-index: 2;
+}
+
+.image-ring {
+  position: absolute;
+  inset: -15px;
+  border: 2px dashed var(--gold);
+  border-radius: 50%;
+  animation: rotate 30s linear infinite;
+}
+
+.bishop-info {
+  flex: 1;
+}
+
+.role-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: var(--gold);
+  color: var(--black);
+  font-weight: 600;
+  font-size: 0.85rem;
+  border-radius: 50px;
+  margin-bottom: 1rem;
+}
+
+.bishop-info h2 {
+  font-size: 2.5rem;
+  color: var(--white);
+  margin-bottom: 0.5rem;
+}
+
+.bishop-title {
+  font-size: 1.2rem;
+  color: var(--gold);
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.bishop-description {
+  font-size: 1rem;
+  color: var(--gray-300);
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+
+.bishop-church {
+  font-size: 0.9rem;
+  color: var(--gray-400);
+  font-style: italic;
+}
+
+/* Elders & Deacons */
+.elders-section {
+  background: var(--bg-primary);
+}
+
+.leadership-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+}
+
+.leadership-category {
+  text-align: center;
+}
+
+.category-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.category-icon {
+  color: var(--gold);
+}
+
+.category-header h3 {
+  font-size: 1.5rem;
+  color: var(--text-primary);
+}
+
+.people-grid,
+.coordinators-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.person-card {
+  background: var(--bg-secondary);
+  padding: 1.5rem;
+  border-radius: 16px;
+  text-align: center;
+  transition: var(--transition);
+  border: 1px solid var(--gold);
+}
+
+.person-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.person-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 1rem;
+  border: 3px solid var(--gold);
+}
+
+.person-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.person-card h4 {
+  font-size: 1rem;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.person-role {
+  font-size: 0.85rem;
+  color: var(--gold);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.person-desc {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* Section Headers */
+.section-badge {
+  display: inline-block;
+  padding: 0.4rem 1rem;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  color: var(--black);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border-radius: 50px;
+  margin-bottom: 1rem;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.section-header h2 {
+  font-size: 2.2rem;
+  color: var(--text-primary);
+}
+
+.title-nowrap {
+  white-space: nowrap;
+}
+
+.section-subtitle {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin-top: 0.5rem;
+}
+
+/* Coordinators Section */
+.coordinators-section {
+  background: var(--bg-primary);
+}
+
+.coordinators-grid {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Executive Section */
+.executive-section {
+  background: var(--bg-secondary);
+}
+
+.executive-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.executive-card {
+  background: var(--bg-card);
+  padding: 2rem;
+  border-radius: 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition);
+  border: 1px solid var(--gold);
+}
+
+.executive-card:first-child {
+  border: 3px solid var(--gold);
+}
+
+.executive-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-xl);
+}
+
+.executive-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.35rem 0.75rem;
+  background: var(--gold);
+  color: var(--black);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  border-radius: 50px;
+}
+
+.executive-avatar {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 1rem;
+  border: 4px solid var(--gold);
+}
+
+.executive-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.executive-card h3 {
+  font-size: 1.2rem;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.executive-role {
+  font-size: 0.9rem;
+  color: var(--gold);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.executive-desc {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* Secretariat */
+.secretariat-section {
+  background: var(--bg-primary);
+}
+
+.secretariat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.secretariat-card {
+  background: var(--bg-secondary);
+  padding: 2rem;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  transition: var(--transition);
+  border: 1px solid var(--gold);
+}
+
+.secretariat-card:hover {
+  transform: translateX(5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.secretariat-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid var(--gold);
+  flex-shrink: 0;
+}
+
+.secretariat-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.secretariat-card h3 {
+  font-size: 1.1rem;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.secretariat-role {
+  font-size: 0.85rem;
+  color: var(--gold);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.secretariat-desc {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* Heads */
+.heads-section {
+  background: var(--bg-secondary);
+}
+
+.heads-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.head-card {
+  background: var(--bg-card);
+  padding: 1.5rem;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: var(--transition);
+  border: 1px solid var(--gold);
+}
+
+.head-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.head-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid var(--gold);
+  flex-shrink: 0;
+}
+
+.head-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.head-info h3 {
+  font-size: 1rem;
+  color: var(--text-primary);
+  margin-bottom: 0.15rem;
+}
+
+.head-role {
+  font-size: 0.85rem;
+  color: var(--gold);
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.head-dept {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  background: var(--bg-secondary);
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  border-radius: 50px;
+  color: var(--text-secondary);
+}
+
+/* Vice Heads */
+.vice-section {
+  background: var(--bg-primary);
+}
+
+.vice-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.vice-card {
+  background: var(--bg-secondary);
+  padding: 2rem;
+  border-radius: 16px;
+  text-align: center;
+  transition: var(--transition);
+  border: 1px solid var(--gold);
+}
+
+.vice-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.vice-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 1rem;
+  border: 3px solid var(--gold);
+}
+
+.vice-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.vice-card h3 {
+  font-size: 1rem;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.vice-role {
+  font-size: 0.85rem;
+  color: var(--gold);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.vice-dept {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background: var(--bg-card);
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 50px;
+  color: var(--text-secondary);
+}
+
+/* Ministries Full */
+.ministries-full-section {
+  background: var(--bg-secondary);
+}
+
+.ministries-full-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.ministry-full-card {
+  background: var(--bg-card);
+  padding: 2rem 1.5rem;
+  border-radius: 16px;
+  text-align: center;
+  transition: var(--transition);
+}
+
+.ministry-full-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-xl);
+}
+
+.ministry-full-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: var(--black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+}
+
+.ministry-full-card h3 {
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.ministry-full-card p {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .ministries-full-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .executive-grid {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 700px;
+  }
+}
+
+@media (max-width: 900px) {
+  .bishop-profile {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .leadership-row {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .executive-grid {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+  }
+
+  .heads-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .leadership-hero h1 {
+    font-size: clamp(1.2rem, 5vw, 1.8rem);
+    white-space: nowrap;
+  }
+  
+  .title-nowrap {
+    font-size: clamp(1.1rem, 4vw, 1.5rem);
+  }
+
+  .people-grid,
+  .coordinators-grid,
+  .secretariat-grid,
+  .heads-grid,
+  .vice-grid,
+  .executive-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .secretariat-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 1rem;
+  }
+
+  .head-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 1rem;
+  }
+  
+  .executive-card {
+    padding: 1rem;
+  }
+  
+  .person-card, .vice-card {
+    padding: 1rem;
+  }
+
+  .ministries-full-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .bishop-image img {
+    width: 220px;
+    height: 220px;
+  }
+}
