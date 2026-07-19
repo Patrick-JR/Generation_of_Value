@@ -74,7 +74,7 @@ npm run build
 ```
 Upload the `dist` folder contents.
 
-**Note**: Admin features require a backend server. For static hosting, the admin will show connection errors.
+**Note**: Admin features require a backend server. The admin will show connection errors in static-only hosting.
 
 ### Option 2: Full Stack Deployment
 For full functionality:
@@ -116,11 +116,4 @@ To fully prepare for production:
 
 1. **Email Service**: Replace console logging with actual email service (SendGrid, Mailgun, etc.)
 2. **Image Storage**: Set up cloud storage (AWS S3, Cloudinary) for carousel images
-3. **Authentication**: Use JWT with refresh tokens and proper expiration
-4. **Security**: Add rate limiting, CORS configuration, input sanitization
-5. **Database**: Consider PostgreSQL/MySQL for better concurrency
-6. **Hosting**: Use a proper hosting platform with Node.js support
-
-## Contact
-
-For support: govpccmateroyouth@gmail.com
+3. **Authentication**: Set up proper JWT refresh tokens and expiration
