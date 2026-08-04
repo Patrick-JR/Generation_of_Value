@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
-import { Cross, Mail, Phone, MapPin } from 'lucide-react';
+import { Mail, Phone, MapPin } from 'lucide-react';
 import { churchInfo } from '../data/content';
 import './Footer.css';
+import pccLogo from '../images/PCC_Logo.png';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -14,7 +15,7 @@ const Footer = () => {
             <div className="footer-brand">
               <Link to="/" className="footer-logo">
                 <div className="logo-icon">
-                  <Cross size={28} />
+                  <img src={pccLogo} alt="PCC Logo" className="logo-icon-img" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
                 </div>
                 <div className="logo-text">
                   <span className="logo-main">GOV</span>

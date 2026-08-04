@@ -609,12 +609,19 @@
 
 @media (max-width: 600px) {
   .about-hero {
-    height: 250px;
+    height: auto;
+    min-height: 220px;
+    padding: 2.5rem 0;
+  }
+
+  .about-hero .hero-content {
+    padding: 1.25rem;
   }
 
   .about-hero h1 {
-    font-size: 1.5rem;
-    white-space: nowrap;
+    font-size: clamp(1.4rem, 6vw, 1.8rem);
+    white-space: normal;
+    word-break: break-word;
   }
 
   .about-hero p {

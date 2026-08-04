@@ -2,19 +2,45 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ShoppingBag, Heart, Eye, Search, X, Phone, Send, Check, Plus, Minus, ChevronDown, ChevronUp, Filter, User, MessageSquare, CheckCircle } from 'lucide-react';
 import { shopProducts, churchInfo } from '../data/content';
+import { submitOrder } from '../services/api';
 import './Shop.css';
 import heroImg from '../images/GOV_Shirt.jpg';
-import shirtImg from '../images/GOV_Shirt.jpg';
-import hoodieImg from '../images/Serving_God_hoodie.jpg';
+import golfTshirt from '../images/GOV_Shirt.jpg';
+import servingGodHoodie from '../images/Serving_God_hoodie.jpg';
+
+// New products images
+import hoodieServing from '../Products/hoodie-serving.png';
+import shirtServing from '../Products/Shirt-Serving.png';
+import shirtRooted from '../Products/rooted-T-shirt.png';
+import notebookServing from '../Products/Notebook-serving.png';
+import pouchServing from '../Products/Phone-pouch-serving.png';
+import pouchRooted from '../Products/Phone-Pouch-rooted.png';
+import bottleServing from '../Products/Serving-Drink-Bottle.png';
+import toteServing from '../Products/Tote-bag-Serving.png';
+import toteServingBlack from '../Products/Tote-bug-serving-black.png';
+import toteRooted from '../Products/Tote-bug-Rooted.png';
+import bagServing from '../Products/School-bug-serving.png';
+import bagRooted from '../Products/Rooted-school-bug.png';
 
 // Map product image keys to real imported images
 const productImages = {
-  tshirt: shirtImg,
-  hoodie: hoodieImg,
-  pouch: shirtImg,
-  skin: hoodieImg,
-  cap: shirtImg,
-  wristband: hoodieImg,
+  golf_tshirt: golfTshirt,
+  serving_god_hoodie: servingGodHoodie,
+  hoodie_serving: hoodieServing,
+  shirt_serving: shirtServing,
+  shirt_rooted: shirtRooted,
+  notebook_serving: notebookServing,
+  pouch_serving: pouchServing,
+  pouch_rooted: pouchRooted,
+  bottle_serving: bottleServing,
+  tote_serving: toteServing,
+  tote_serving_black: toteServingBlack,
+  tote_rooted: toteRooted,
+  bag_serving: bagServing,
+  bag_rooted: bagRooted,
+  skin: servingGodHoodie, // placeholder
+  cap: golfTshirt, // placeholder
+  wristband: servingGodHoodie, // placeholder
 };
 
 const Shop = () => {
@@ -32,6 +58,8 @@ const Shop = () => {
   const [orderForm, setOrderForm] = useState({ name: '', phone: '', message: '' });
   const [errors, setErrors] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [apiError, setApiError] = useState('');
 
   // Open order form for a product
   const handleBuyNow = (product) => {
@@ -66,27 +94,45 @@ const Shop = () => {
     return Object.keys(e).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validate()) return;
 
-    // Build WhatsApp message (placeholder — automation will replace this later)
-    const msg =
-      `Hello GOV Shop! 👋\n\n` +
-      `🛍️ *Order Request*\n` +
-      `----------------------------\n` +
-      `*Product:* ${orderProduct.name}\n` +
-      `*Color:* ${selectedColor}\n` +
-      `*Size:* ${selectedSize}\n` +
-      `*Qty:* ${quantity}\n` +
-      `*Total:* K${orderProduct.price * quantity}\n` +
-      `----------------------------\n` +
-      `*Name:* ${orderForm.name}\n` +
-      `*Phone:* ${orderForm.phone}\n` +
-      (orderForm.message ? `*Note:* ${orderForm.message}\n` : '');
+    setIsSubmitting(true);
+    setApiError('');
 
-    window.open(`https://wa.me/260573351036?text=${encodeURIComponent(msg)}`, '_blank');
-    setIsSubmitted(true);
+    try {
+      // 1. Send to Backend
+      await submitOrder({
+        product: { id: orderProduct.id, name: orderProduct.name, price: orderProduct.price },
+        color: selectedColor,
+        size: selectedSize,
+        quantity,
+        customer: { name: orderForm.name, phone: orderForm.phone, message: orderForm.message }
+      });
+
+      // 2. Build WhatsApp message (fallback/human touch)
+      const msg =
+        `Hello GOV Shop! 👋\n\n` +
+        `🛍️ *Order Request*\n` +
+        `----------------------------\n` +
+        `*Product:* ${orderProduct.name}\n` +
+        `*Color:* ${selectedColor}\n` +
+        `*Size:* ${selectedSize}\n` +
+        `*Qty:* ${quantity}\n` +
+        `*Total:* K${orderProduct.price * quantity}\n` +
+        `----------------------------\n` +
+        `*Name:* ${orderForm.name}\n` +
+        `*Phone:* ${orderForm.phone}\n` +
+        (orderForm.message ? `*Note:* ${orderForm.message}\n` : '');
+
+      window.open(`https://wa.me/260573351036?text=${encodeURIComponent(msg)}`, '_blank');
+      setIsSubmitted(true);
+    } catch (err) {
+      setApiError(err.message);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   // Filter & sort
@@ -469,9 +515,15 @@ const Shop = () => {
                       <span className="total-amount">K{orderProduct.price * quantity}</span>
                     </div>
 
-                    <button type="submit" className="btn btn-primary btn-full submit-order-btn">
+                    {apiError && (
+                      <div className="field-error" style={{ textAlign: 'center', margin: '0.5rem 0' }}>
+                        {apiError}
+                      </div>
+                    )}
+
+                    <button type="submit" className="btn btn-primary btn-full submit-order-btn" disabled={isSubmitting}>
                       <Send size={18} />
-                      Send Order via WhatsApp
+                      {isSubmitting ? 'Processing...' : 'Send Order via WhatsApp'}
                     </button>
 
                     <p className="order-note">

@@ -1,9 +1,12 @@
+/* ─────────────────────────────────────
+   TOP NAVBAR
+───────────────────────────────────── */
 .navbar {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1000;
+  z-index: 1100;
   padding: 1rem 0;
   transition: var(--transition);
   background: transparent;
@@ -24,6 +27,7 @@
   justify-content: space-between;
 }
 
+/* ─── Logo ─── */
 .navbar-logo {
   display: flex;
   align-items: center;
@@ -33,18 +37,23 @@
 .logo-icon {
   width: 45px;
   height: 45px;
-  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
   border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--black);
-  transform: rotate(0deg);
   transition: var(--transition);
+  padding: 4px;
+}
+
+.logo-icon-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .navbar-logo:hover .logo-icon {
-  transform: rotate(360deg);
+  transform: scale(1.08);
 }
 
 .logo-text {
@@ -71,6 +80,7 @@
   text-transform: uppercase;
 }
 
+/* ─── Desktop nav links ─── */
 .navbar-links {
   display: flex;
   align-items: center;
@@ -106,18 +116,22 @@
   width: 100%;
 }
 
-[data-theme="light"] .nav-link {
+/* Light-theme nav link colours */
+[data-theme="light"] .navbar .nav-link {
+  color: var(--white);
+}
+[data-theme="light"] .navbar.scrolled .nav-link {
   color: var(--black);
 }
 
-[data-theme="light"] .mobile-nav-link {
-  color: var(--black);
+[data-theme="light"] .navbar .logo-sub {
+  color: rgba(255, 255, 255, 0.7);
+}
+[data-theme="light"] .navbar.scrolled .logo-sub {
+  color: var(--text-secondary);
 }
 
-[data-theme="light"] .mobile-menu-btn {
-  color: var(--black);
-}
-
+/* ─── Desktop actions ─── */
 .navbar-actions {
   display: flex;
   align-items: center;
@@ -162,106 +176,129 @@
   box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
 }
 
-.mobile-menu-btn {
+/* ─── Mobile top-right: shop + theme only ─── */
+.mobile-top-actions {
   display: none;
-  width: 40px;
-  height: 40px;
-  border: none;
-  background: transparent;
-  color: var(--gold);
-  cursor: pointer;
-}
-
-.mobile-shop-btn {
-  display: none;
-  color: var(--gold);
-}
-
-[data-theme="light"] .mobile-shop-btn {
-  color: var(--black);
-}
-
-.mobile-menu {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: auto;
-  right: 0;
-  bottom: auto;
-  height: max-content;
-  border-bottom-left-radius: 20px;
-  width: 260px;
-  background: var(--bg-primary);
-  z-index: 999;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateX(100%);
-  transition: var(--transition);
-  box-shadow: -5px 5px 25px rgba(0,0,0,0.15);
-}
-
-.mobile-menu.open {
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(0);
-}
-
-.mobile-menu-content {
-  display: flex;
-  flex-direction: column;
-  padding: 80px 2rem 2rem 2rem;
-  gap: 0.5rem;
-}
-
-.mobile-nav-link {
-  padding: 1rem;
-  font-size: 1.1rem;
-  font-weight: 500;
-  color: var(--white);
-  border-radius: 12px;
-  transition: var(--transition);
-}
-
-.mobile-nav-link:hover,
-.mobile-nav-link.active {
-  background: var(--bg-secondary);
-  color: var(--gold);
-}
-
-.mobile-nav-link.shop-link {
-  margin-top: 1rem;
-  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-  color: var(--black);
-  justify-content: center;
-  display: flex;
   align-items: center;
   gap: 0.5rem;
 }
 
-@media (max-width: 968px) {
-  .navbar-links {
-    display: none;
-  }
+.mobile-shop-icon-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  color: var(--black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
 
+.mobile-shop-icon-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 4px 14px rgba(212, 175, 55, 0.4);
+}
+
+[data-theme="light"] .navbar .mobile-top-actions .theme-toggle {
+  background: rgba(255, 255, 255, 0.2);
+  color: var(--white);
+}
+[data-theme="light"] .navbar.scrolled .mobile-top-actions .theme-toggle {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+
+/* ─────────────────────────────────────
+   MOBILE BOTTOM STICKY NAV
+───────────────────────────────────── */
+.mobile-bottom-nav {
+  display: none; /* shown only on mobile via media query */
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1100;
+  background: var(--bg-primary);
+  border-top: 1px solid rgba(212, 175, 55, 0.2);
+  box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.18);
+  padding: 0.5rem 0 env(safe-area-inset-bottom, 0.5rem);
+
+  /* 5 equally spaced columns */
+  display: none;
+  grid-template-columns: repeat(5, 1fr);
+  align-items: center;
+}
+
+.bottom-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+  padding: 0.4rem 0;
+  color: var(--text-secondary);
+  transition: color 0.2s ease;
+  text-decoration: none;
+  position: relative;
+}
+
+.bottom-nav-item.active {
+  color: var(--gold);
+}
+
+.bottom-nav-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Gold dot below the active icon */
+.bottom-nav-dot {
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--gold);
+}
+
+.bottom-nav-label {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+/* ─────────────────────────────────────
+   RESPONSIVE BREAKPOINTS
+───────────────────────────────────── */
+
+/* ≤ 968px: switch to mobile layout */
+@media (max-width: 968px) {
+  /* Hide desktop elements */
+  .navbar-links,
   .shop-btn {
     display: none;
   }
 
-  .mobile-menu-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  /* Also hide the desktop theme-toggle (first child of navbar-actions) */
+  .navbar-actions > .theme-toggle {
+    display: none;
   }
 
-  .mobile-shop-btn {
+  /* Show mobile top actions */
+  .mobile-top-actions {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 0.5rem;
   }
 
-  .mobile-menu {
-    display: block;
+  /* Show sticky bottom nav */
+  .mobile-bottom-nav {
+    display: grid;
   }
 }
 

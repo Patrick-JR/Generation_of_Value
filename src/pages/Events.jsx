@@ -220,7 +220,7 @@ const Events = () => {
             </div>
             <div className="stat-divider"></div>
             <div className="stat-item">
-              <span className="stat-number">100M</span>
+              <span className="stat-number">100K</span>
               <span className="stat-label">Souls to Win</span>
             </div>
           </motion.div>

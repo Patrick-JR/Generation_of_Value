@@ -614,13 +614,25 @@
 }
 
 @media (max-width: 600px) {
+  .leadership-hero {
+    height: auto;
+    min-height: 200px;
+    padding: 2.5rem 0;
+  }
+
+  .leadership-hero .hero-content {
+    padding: 1.25rem;
+  }
+
   .leadership-hero h1 {
-    font-size: clamp(1.2rem, 5vw, 1.8rem);
-    white-space: nowrap;
+    font-size: clamp(1.3rem, 5.5vw, 1.8rem);
+    white-space: normal;
+    word-break: break-word;
   }
   
   .title-nowrap {
     font-size: clamp(1.1rem, 4vw, 1.5rem);
+    white-space: normal;
   }
 
   .people-grid,

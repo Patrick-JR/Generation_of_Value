@@ -344,6 +344,13 @@ button {
 .mt-5 { margin-top: 3rem; }
 
 /* Responsive */
+@media (max-width: 968px) {
+  body {
+    /* Reserve space for the sticky bottom navigation bar */
+    padding-bottom: 68px;
+  }
+}
+
 @media (max-width: 768px) {
   .section {
     padding: 3rem 0;

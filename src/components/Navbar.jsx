@@ -1,10 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Sun, Moon, Cross, ShoppingBag } from 'lucide-react';
+import { Sun, Moon, ShoppingBag, Home, Info, Users, Calendar, Mail } from 'lucide-react';
 import './Navbar.css';
 
+import pccLogo from '../images/PCC_Logo.png';
+
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [theme, setTheme] = useState('light');
   const location = useLocation();
@@ -23,10 +24,6 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  useEffect(() => {
-    setIsOpen(false);
-  }, [location]);
-
   const toggleTheme = () => {
     const newTheme = theme === 'light' ? 'dark' : 'light';
     setTheme(newTheme);
@@ -42,66 +39,86 @@ const Navbar = () => {
     { name: 'Contact', path: '/contact' }
   ];
 
+  const bottomNavLinks = [
+    { name: 'Home', path: '/', Icon: Home },
+    { name: 'About', path: '/about', Icon: Info },
+    { name: 'Leadership', path: '/leadership', Icon: Users },
+    { name: 'Events', path: '/events', Icon: Calendar },
+    { name: 'Contact', path: '/contact', Icon: Mail },
+  ];
+
   return (
-    <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
-      <div className="navbar-container">
-        <Link to="/" className="navbar-logo">
-          <div className="logo-icon">
-            <Cross size={24} />
+    <>
+      {/* ── Top Navbar ── */}
+      <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
+        <div className="navbar-container">
+          <Link to="/" className="navbar-logo">
+            <div className="logo-icon">
+              <img src={pccLogo} alt="PCC Logo" className="logo-icon-img" />
+            </div>
+            <div className="logo-text">
+              <span className="logo-main">GOV</span>
+              <span className="logo-sub">Generation of Value</span>
+            </div>
+          </Link>
+
+          {/* Desktop links */}
+          <div className="navbar-links">
+            {navLinks.map((link) => (
+              <Link
+                key={link.path}
+                to={link.path}
+                className={`nav-link ${location.pathname === link.path ? 'active' : ''}`}
+              >
+                {link.name}
+              </Link>
+            ))}
           </div>
-          <div className="logo-text">
-            <span className="logo-main">GOV</span>
-            <span className="logo-sub">Generation of Value</span>
+
+          {/* Desktop actions */}
+          <div className="navbar-actions">
+            <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
+              {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
+            </button>
+            <Link to="/shop" className="shop-btn">
+              <ShoppingBag size={18} />
+              Shop
+            </Link>
+
+            {/* Mobile top-right: shop + theme */}
+            <div className="mobile-top-actions">
+              <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
+                {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
+              </button>
+              <Link to="/shop" className="mobile-shop-icon-btn" aria-label="Shop">
+                <ShoppingBag size={22} />
+              </Link>
+            </div>
           </div>
-        </Link>
+        </div>
+      </nav>
 
-        <div className="navbar-links">
-          {navLinks.map((link) => (
+      {/* ── Mobile Bottom Nav ── */}
+      <nav className="mobile-bottom-nav" aria-label="Mobile navigation">
+        {bottomNavLinks.map(({ name, path, Icon }) => {
+          const isActive = location.pathname === path;
+          return (
             <Link
-              key={link.path}
-              to={link.path}
-              className={`nav-link ${location.pathname === link.path ? 'active' : ''}`}
+              key={path}
+              to={path}
+              className={`bottom-nav-item ${isActive ? 'active' : ''}`}
+              aria-label={name}
             >
-              {link.name}
+              <span className="bottom-nav-icon">
+                <Icon size={22} />
+                {isActive && <span className="bottom-nav-dot" />}
+              </span>
+              <span className="bottom-nav-label">{name}</span>
             </Link>
-          ))}
-        </div>
-
-        <div className="navbar-actions">
-          <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
-            {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
-          </button>
-          <Link to="/shop" className="shop-btn">
-            <ShoppingBag size={18} />
-            Shop
-          </Link>
-          <Link to="/shop" className="mobile-shop-btn">
-            <ShoppingBag size={24} />
-          </Link>
-          <button className="mobile-menu-btn" onClick={() => setIsOpen(!isOpen)}>
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
-      </div>
-
-      <div className={`mobile-menu ${isOpen ? 'open' : ''}`}>
-        <div className="mobile-menu-content">
-          {navLinks.map((link) => (
-            <Link
-              key={link.path}
-              to={link.path}
-              className={`mobile-nav-link ${location.pathname === link.path ? 'active' : ''}`}
-            >
-              {link.name}
-            </Link>
-          ))}
-          <Link to="/shop" className="mobile-nav-link shop-link">
-            <ShoppingBag size={18} />
-            Shop
-          </Link>
-        </div>
-      </div>
-    </nav>
+          );
+        })}
+      </nav>
+    </>
   );
 };
 

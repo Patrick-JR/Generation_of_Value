@@ -8,7 +8,7 @@ export const churchInfo = {
   phone: "+260 573 351 036",
   year: 2026,
   wordOfYear: "The Year of Giving Gratitude to God",
-  mission: "Winning 100 million souls for Christ",
+  mission: "Winning 100,000 souls for Christ",
   reach: "200+ people reached through events"
 };
 
@@ -29,7 +29,7 @@ export const aboutContent = {
     "Intentional service"
   ],
   vision: "To equip the saints for the work of ministry. — Ephesians 4:12",
-  mission: "Winning 100 million souls for Christ",
+  mission: "Winning 100,000 souls for Christ",
   wordOfYear: "2026 – The Year of Giving Gratitude to God",
   wordOfYearFocus: [
     "Acknowledge God in all things",
@@ -208,62 +208,142 @@ export const events = [
 export const shopProducts = [
   {
     id: 1,
-    name: "GOV Classic T-Shirt",
-    price: 150,
-    description: "Premium cotton t-shirt with embroidered GOV logo",
-    colors: ["Black", "White", "Gold"],
+    name: "GOV T-Shirt",
+    price: 160,
+    description: "Premium GOV t-shirt with embroidered logo",
+    colors: ["White", "Gold", "Black"],
     sizes: ["S", "M", "L", "XL", "XXL"],
-    image: "tshirt",
+    image: "golf_tshirt",
     badge: "Best Seller"
   },
   {
     id: 2,
-    name: "GOV Premium Hoodie",
+    name: "GOV Serving God Hoodie (Classic)",
     price: 350,
-    description: "Warm and comfortable hoodie with embroidered logo",
-    colors: ["Black", "Navy"],
+    description: "Comfortable and warm hoodie with Serving God logo design",
+    colors: ["Black", "Gold"],
     sizes: ["S", "M", "L", "XL", "XXL"],
-    image: "hoodie",
-    badge: "Premium"
+    image: "serving_god_hoodie",
+    badge: "Classic"
   },
   {
     id: 3,
-    name: "GOV Phone Pouch",
-    price: 80,
-    description: "Stylish phone pouch with GOV branding",
+    name: "GOV Serving God Premium Hoodie",
+    price: 350,
+    description: "Premium fleece hoodie featuring the clean Serving God artwork",
     colors: ["Black", "White"],
-    sizes: ["Universal"],
-    image: "pouch",
-    badge: null
+    sizes: ["S", "M", "L", "XL", "XXL"],
+    image: "hoodie_serving",
+    badge: "Premium"
   },
   {
     id: 4,
-    name: "GOV Laptop Skin",
-    price: 120,
-    description: "Premium vinyl skin for laptops",
-    colors: ["Black", "White"],
-    sizes: ["13\"", "15\"", "16\""],
-    image: "skin",
-    badge: null
+    name: "GOV Serving God T-Shirt",
+    price: 160,
+    description: "High-quality cotton t-shirt with Serving God front print",
+    colors: ["White", "Black"],
+    sizes: ["S", "M", "L", "XL", "XXL"],
+    image: "shirt_serving",
+    badge: "Hot"
   },
   {
     id: 5,
-    name: "GOV Cap",
-    price: 90,
-    description: "Adjustable cap with embroidered GOV logo",
-    colors: ["Black", "Gold"],
-    sizes: ["One Size"],
-    image: "cap",
-    badge: "New"
+    name: "GOV Rooted T-Shirt",
+    price: 160,
+    description: "Special edition t-shirt featuring the Rooted theme design",
+    colors: ["White", "Black"],
+    sizes: ["S", "M", "L", "XL"],
+    image: "shirt_rooted",
+    badge: null
   },
   {
     id: 6,
-    name: "GOV Wristband",
-    price: 30,
-    description: "Silicone wristband with embossed logo",
-    colors: ["Gold", "Black", "White"],
+    name: "GOV Serving God Notebook",
+    price: 85,
+    description: "Sturdy and elegant notebook for service notes, scriptures, and journaling",
+    colors: ["White", "Gold"],
+    sizes: ["Standard"],
+    image: "notebook_serving",
+    badge: "Essential"
+  },
+  {
+    id: 7,
+    name: "GOV Serving God Phone Pouch",
+    price: 75,
+    description: "Durable and stylish phone pouch featuring Serving God branding",
+    colors: ["Black", "White"],
+    sizes: ["Universal"],
+    image: "pouch_serving",
+    badge: null
+  },
+  {
+    id: 8,
+    name: "GOV Rooted Phone Pouch",
+    price: 75,
+    description: "Elegant phone pouch featuring Rooted branding design",
+    colors: ["Black", "White"],
+    sizes: ["Universal"],
+    image: "pouch_rooted",
+    badge: null
+  },
+  {
+    id: 9,
+    name: "GOV Serving God Drink Bottle",
+    price: 120,
+    description: "High-quality insulated drink bottle to keep your drinks cool",
+    colors: ["Silver", "Black"],
+    sizes: ["750ml"],
+    image: "bottle_serving",
+    badge: "New"
+  },
+  {
+    id: 10,
+    name: "GOV Serving God Tote Bag",
+    price: 60,
+    description: "Eco-friendly canvas tote bag with Serving God branding",
+    colors: ["White"],
     sizes: ["One Size"],
-    image: "wristband",
+    image: "tote_serving",
+    badge: null
+  },
+  {
+    id: 11,
+    name: "GOV Serving God Tote Bag (Black)",
+    price: 60,
+    description: "Premium black canvas tote bag with Serving God branding",
+    colors: ["Black"],
+    sizes: ["One Size"],
+    image: "tote_serving_black",
+    badge: null
+  },
+  {
+    id: 12,
+    name: "GOV Rooted Tote Bag",
+    price: 60,
+    description: "Eco-friendly canvas tote bag with Rooted theme design",
+    colors: ["White"],
+    sizes: ["One Size"],
+    image: "tote_rooted",
+    badge: null
+  },
+  {
+    id: 13,
+    name: "GOV Serving God Backpack",
+    price: 260,
+    description: "Spacious and comfortable school bag/backpack with Serving God design",
+    colors: ["Black", "Blue"],
+    sizes: ["Standard"],
+    image: "bag_serving",
+    badge: "Student Fav"
+  },
+  {
+    id: 14,
+    name: "GOV Rooted Backpack",
+    price: 260,
+    description: "Comfortable and durable school bag/backpack featuring the Rooted theme design",
+    colors: ["Black", "White"],
+    sizes: ["Standard"],
+    image: "bag_rooted",
     badge: null
   }
 ];

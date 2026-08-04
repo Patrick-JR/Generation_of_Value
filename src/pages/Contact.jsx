@@ -1,11 +1,38 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Clock, MessageCircle, Send } from 'lucide-react';
 import { churchInfo } from '../data/content';
+import { submitContactMessage } from '../services/api';
 import './Contact.css';
 import heroImg from '../images/behind_church.jpg';
 import churchImg from '../images/House_of_miracles.jpg';
 
 const Contact = () => {
+  const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
+  const [status, setStatus] = useState('idle'); // idle, submitting, success, error
+  const [errorMsg, setErrorMsg] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!formData.name.trim() || !formData.email.trim() || !formData.subject.trim() || !formData.message.trim()) {
+      setStatus('error');
+      setErrorMsg('Please fill in all fields.');
+      return;
+    }
+    
+    setStatus('submitting');
+    setErrorMsg('');
+
+    try {
+      await submitContactMessage(formData);
+      setStatus('success');
+      setFormData({ name: '', email: '', subject: '', message: '' });
+    } catch (err) {
+      setStatus('error');
+      setErrorMsg(err.message);
+    }
+  };
+
   return (
     <div className="contact-page">
       {/* Hero */}
@@ -179,29 +206,68 @@ const Contact = () => {
               <p>Have questions or want to get involved? We'd love to hear from you!</p>
             </div>
 
-            <form className="contact-form">
-              <div className="form-row">
-                <div className="form-group">
-                  <label>Your Name</label>
-                  <input type="text" placeholder="Enter your name" />
+            <form className="contact-form" onSubmit={handleSubmit} noValidate>
+              {status === 'success' ? (
+                <div style={{ background: '#dcfce7', color: '#166534', padding: '1.5rem', borderRadius: '12px', textAlign: 'center' }}>
+                  <h4 style={{ marginBottom: '0.5rem', fontSize: '1.2rem', color: '#166534' }}>Message Sent!</h4>
+                  <p style={{ margin: 0, fontSize: '0.95rem' }}>Thank you for reaching out. We will get back to you soon.</p>
+                  <button type="button" onClick={() => setStatus('idle')} className="btn btn-primary" style={{ marginTop: '1.5rem' }}>
+                    Send Another Message
+                  </button>
                 </div>
-                <div className="form-group">
-                  <label>Email Address</label>
-                  <input type="email" placeholder="Enter your email" />
-                </div>
-              </div>
-              <div className="form-group">
-                <label>Subject</label>
-                <input type="text" placeholder="What is this about?" />
-              </div>
-              <div className="form-group">
-                <label>Message</label>
-                <textarea rows={5} placeholder="Your message..."></textarea>
-              </div>
-              <button type="submit" className="btn btn-primary">
-                <Send size={18} />
-                Send Message
-              </button>
+              ) : (
+                <>
+                  <div className="form-row">
+                    <div className="form-group">
+                      <label>Your Name</label>
+                      <input 
+                        type="text" 
+                        placeholder="Enter your name" 
+                        value={formData.name}
+                        onChange={(e) => setFormData({...formData, name: e.target.value})}
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label>Email Address</label>
+                      <input 
+                        type="email" 
+                        placeholder="Enter your email" 
+                        value={formData.email}
+                        onChange={(e) => setFormData({...formData, email: e.target.value})}
+                      />
+                    </div>
+                  </div>
+                  <div className="form-group">
+                    <label>Subject</label>
+                    <input 
+                      type="text" 
+                      placeholder="What is this about?" 
+                      value={formData.subject}
+                      onChange={(e) => setFormData({...formData, subject: e.target.value})}
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label>Message</label>
+                    <textarea 
+                      rows={5} 
+                      placeholder="Your message..."
+                      value={formData.message}
+                      onChange={(e) => setFormData({...formData, message: e.target.value})}
+                    ></textarea>
+                  </div>
+                  
+                  {status === 'error' && (
+                    <div className="field-error" style={{ color: '#ef4444', fontSize: '0.9rem', textAlign: 'center' }}>
+                      {errorMsg}
+                    </div>
+                  )}
+                  
+                  <button type="submit" className="btn btn-primary" disabled={status === 'submitting'}>
+                    <Send size={18} />
+                    {status === 'submitting' ? 'Sending...' : 'Send Message'}
+                  </button>
+                </>
+              )}
             </form>
           </motion.div>
         </div>

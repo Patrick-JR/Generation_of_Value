@@ -57,7 +57,7 @@ const Home = () => {
   const stats = [
     { icon: Users, value: "200+", label: "Youth Reached" },
     { icon: Cross, value: "8", label: "Ministries" },
-    { icon: Target, value: "100M", label: "Souls to Win" },
+    { icon: Target, value: "100K", label: "Souls to Win" },
     { icon: Star, value: "2026", label: "Year of Gratitude" }
   ];
 

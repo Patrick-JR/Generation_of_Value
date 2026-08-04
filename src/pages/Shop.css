@@ -1,6 +1,7 @@
 /* Shop Page */
 .shop-page {
   min-height: 100vh;
+  padding-top: 70px;
   padding-bottom: 4rem;
 }
 
@@ -38,7 +39,7 @@
 
 .hero-content h1 {
   font-family: 'Playfair Display', serif;
-  font-size: 3.5rem;
+  font-size: clamp(1.8rem, 7vw, 3.5rem);
   color: #fff;
   margin-bottom: 0.5rem;
 }
@@ -397,8 +398,8 @@
 /* Cart Float Button */
 .cart-float-btn {
   position: fixed;
-  bottom: 2rem;
-  right: 2rem;
+  bottom: calc(70px + 1.25rem); /* above the mobile bottom nav */
+  right: 1.5rem;
   width: 56px;
   height: 56px;
   border-radius: 50%;
@@ -410,7 +411,7 @@
   align-items: center;
   justify-content: center;
   box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);
-  z-index: 90;
+  z-index: 900;
   transition: all 0.3s;
 }
 
@@ -445,8 +446,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
+  z-index: 1050;
   padding: 1rem;
+  /* On mobile, leave room for both navbars */
+  padding-top: 76px;
+  padding-bottom: 76px;
 }
 
 /* Shared close button */
@@ -1131,13 +1135,30 @@
 }
 
 /* Responsive */
+@media (max-width: 968px) {
+  .cart-float-btn {
+    bottom: calc(65px + 1rem);
+    right: 1rem;
+  }
+}
+
 @media (max-width: 768px) {
   .shop-hero {
-    height: 280px;
+    height: auto;
+    min-height: 180px;
+    padding: 2.5rem 0;
+  }
+
+  .hero-content {
+    padding: 0 1.25rem;
   }
 
   .hero-content h1 {
-    font-size: 2.5rem;
+    font-size: clamp(1.6rem, 7vw, 2.5rem);
+  }
+
+  .hero-content p {
+    font-size: 0.95rem;
   }
 
   .shop-toolbar {
