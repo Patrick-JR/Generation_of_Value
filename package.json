@@ -12,8 +12,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@prisma/client": "^6.19.3",
     "bcryptjs": "^3.0.3",
-    "better-sqlite3": "^12.11.1",
     "cors": "^2.8.6",
     "express": "^5.2.1",
     "framer-motion": "^12.42.2",
@@ -32,6 +32,7 @@
     "@vitejs/plugin-react": "^6.0.3",
     "concurrently": "^9.2.3",
     "oxlint": "^1.71.0",
+    "prisma": "^6.19.3",
     "vite": "^8.1.1"
   }
 }

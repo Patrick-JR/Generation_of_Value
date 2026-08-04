@@ -1,0 +1,114 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model AdminUser {
+  id        Int      @id @default(autoincrement())
+  username  String   @unique
+  password  String
+  email     String?
+  createdAt DateTime @default(now())
+
+  @@map("admin_users")
+}
+
+model Product {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String?
+  price       Float
+  category    String?
+  sizes       String?
+  colors      String?
+  inStock     Int      @default(1) @map("in_stock")
+  createdAt   DateTime @default(now())
+
+  @@map("products")
+}
+
+model Event {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String?
+  date        String
+  time        String?
+  location    String?
+  category    String?
+  highlight   Int      @default(0)
+  createdAt   DateTime @default(now())
+
+  @@map("events")
+}
+
+model Membership {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String?
+  phone     String?
+  age       String?
+  status    String   @default("pending")
+  message   String?
+  createdAt DateTime @default(now())
+
+  @@map("memberships")
+}
+
+model Order {
+  id        Int      @id @default(autoincrement())
+  name      String
+  phone     String?
+  items     String?
+  total     Float?
+  status    String   @default("pending")
+  createdAt DateTime @default(now())
+
+  @@map("orders")
+}
+
+model Setting {
+  id            Int      @id @default(autoincrement())
+  churchName    String?  @map("church_name")
+  tagline       String?
+  address       String?
+  phone         String?
+  email         String?
+  whatsapp      String?
+  serviceTimes  String?  @map("service_times")
+  declaration   String?
+  vision        String?
+  mission       String?
+  wordOfYear    String?  @map("word_of_year")
+  updatedAt     DateTime @default(now()) @updatedAt
+
+  @@map("settings")
+}
+
+model CarouselSlide {
+  id          Int      @id @default(autoincrement())
+  title       String?
+  subtitle    String?
+  ctaText     String?  @map("cta_text")
+  ctaLink     String?  @map("cta_link")
+  imageUrl    String?  @map("image_url")
+  orderNum    Int      @default(0) @map("order_num")
+  active      Int      @default(1)
+  createdAt   DateTime @default(now())
+
+  @@map("carousel_slides")
+}
+
+model PasswordResetCode {
+  id        Int      @id @default(autoincrement())
+  email     String
+  code      String
+  expiresAt DateTime @map("expires_at")
+  used      Int      @default(0)
+  createdAt DateTime @default(now())
+
+  @@map("password_reset_codes")
+}
