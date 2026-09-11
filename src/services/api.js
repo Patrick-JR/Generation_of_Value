@@ -1,5 +1,5 @@
-// Base URL — reads from Vite env variable if set, falls back to localhost
-const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001/api';
+// Base URL — reads from Vite env variable if set, falls back to /api
+const BASE_URL = import.meta.env.VITE_API_URL || '/api';
 
 /**
  * Submit a shop order to the backend.

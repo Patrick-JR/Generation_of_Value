@@ -75,7 +75,7 @@ export const leadership = {
     { name: "Mr. & Mrs. Chanda", role: "Youth Elders", description: "Provide wisdom, mentorship, guidance, and spiritual support." }
   ],
   deacons: [
-    { name: "Mr. & Mrs. Muli", role: "Youth Deacons", description: "Support leadership governance, order, discipline, and administration." }
+    { name: "Mr. & Mrs. Wamulume", role: "Youth Deacons", description: "Support leadership governance, order, discipline, and administration." }
   ],
   coordinators: [
     { name: "Rabeka", role: "Youth Coordinator", description: "Coordinates youth activities and events." },
@@ -209,7 +209,7 @@ export const shopProducts = [
   {
     id: 1,
     name: "GOV T-Shirt",
-    price: 160,
+    price: 180,
     description: "Premium GOV t-shirt with embroidered logo",
     colors: ["White", "Gold", "Black"],
     sizes: ["S", "M", "L", "XL", "XXL"],
@@ -239,7 +239,7 @@ export const shopProducts = [
   {
     id: 4,
     name: "GOV Serving God T-Shirt",
-    price: 160,
+    price: 180,
     description: "High-quality cotton t-shirt with Serving God front print",
     colors: ["White", "Black"],
     sizes: ["S", "M", "L", "XL", "XXL"],
@@ -249,7 +249,7 @@ export const shopProducts = [
   {
     id: 5,
     name: "GOV Rooted T-Shirt",
-    price: 160,
+    price: 180,
     description: "Special edition t-shirt featuring the Rooted theme design",
     colors: ["White", "Black"],
     sizes: ["S", "M", "L", "XL"],
@@ -259,7 +259,7 @@ export const shopProducts = [
   {
     id: 6,
     name: "GOV Serving God Notebook",
-    price: 85,
+    price: 130,
     description: "Sturdy and elegant notebook for service notes, scriptures, and journaling",
     colors: ["White", "Gold"],
     sizes: ["Standard"],
@@ -269,7 +269,7 @@ export const shopProducts = [
   {
     id: 7,
     name: "GOV Serving God Phone Pouch",
-    price: 75,
+    price: 120,
     description: "Durable and stylish phone pouch featuring Serving God branding",
     colors: ["Black", "White"],
     sizes: ["Universal"],
@@ -279,7 +279,7 @@ export const shopProducts = [
   {
     id: 8,
     name: "GOV Rooted Phone Pouch",
-    price: 75,
+    price: 120,
     description: "Elegant phone pouch featuring Rooted branding design",
     colors: ["Black", "White"],
     sizes: ["Universal"],
@@ -299,7 +299,7 @@ export const shopProducts = [
   {
     id: 10,
     name: "GOV Serving God Tote Bag",
-    price: 60,
+    price: 75,
     description: "Eco-friendly canvas tote bag with Serving God branding",
     colors: ["White"],
     sizes: ["One Size"],
@@ -309,7 +309,7 @@ export const shopProducts = [
   {
     id: 11,
     name: "GOV Serving God Tote Bag (Black)",
-    price: 60,
+    price: 75,
     description: "Premium black canvas tote bag with Serving God branding",
     colors: ["Black"],
     sizes: ["One Size"],
@@ -319,7 +319,7 @@ export const shopProducts = [
   {
     id: 12,
     name: "GOV Rooted Tote Bag",
-    price: 60,
+    price: 75,
     description: "Eco-friendly canvas tote bag with Rooted theme design",
     colors: ["White"],
     sizes: ["One Size"],

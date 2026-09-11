@@ -1,0 +1,6 @@
+{
+  "name": "Generation of Value",
+  "description": "Generation of Value (GOV) - The official youth ministry of Praise Christian Centre Matero.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

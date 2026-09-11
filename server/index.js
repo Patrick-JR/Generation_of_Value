@@ -3,12 +3,14 @@ import cors from 'cors';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import nodemailer from 'nodemailer';
+import path from 'path';
+import { createServer as createViteServer } from 'vite';
 import prisma from './prismaClient.js';
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = 3000;
 const JWT_SECRET = process.env.JWT_SECRET || 'gov-secret-key-change-in-production';
-const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173';
+const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:3000';
 
 // Email configuration
 const EMAIL_HOST = process.env.EMAIL_HOST || 'smtp.gmail.com';
@@ -59,7 +61,7 @@ async function seedDatabase() {
           whatsapp: 'https://wa.me/260973351036',
           serviceTimes: 'Sundays 08:00 AM - 12:00 PM\nWednesdays 18:00 PM - 20:00 PM',
           declaration: 'We are Generation of Value - A holy nation, a royal priesthood, a peculiar people who declare the praises of Him who called us out of darkness into His marvelous light.',
-          vision: 'To raise a generation of young people who walk in divine purpose, integrity, and excellence, impacting their communities for God\\'s Kingdom.',
+          vision: "To raise a generation of young people who walk in divine purpose, integrity, and excellence, impacting their communities for God's Kingdom.",
           mission: 'Equip, Empower, and Deploy young people to fulfill their God-given potential through mentorship, discipleship, and practical ministry experience.',
           wordOfYear: 'EXCELLENCE'
         }
@@ -143,7 +145,7 @@ async function sendEmail(to, subject, html) {
     return { demo: true };
   }
   try {
-    await transporter.sendMail({ from: \`"GOV Admin" <\${EMAIL_USER}>\`, to, subject, html });
+    await transporter.sendMail({ from: `"GOV Admin" <${EMAIL_USER}>`, to, subject, html });
     console.log('✅ Email sent to:', to);
     return { success: true };
   } catch (error) {
@@ -179,14 +181,14 @@ app.post('/api/auth/forgot-password', async (req, res) => {
 
     await prisma.passwordResetCode.create({ data: { email, code, expiresAt } });
 
-    const emailResult = await sendEmail(email, 'GOV Admin - Password Reset Code', \`
+    const emailResult = await sendEmail(email, 'GOV Admin - Password Reset Code', `
       <div style="font-family: Arial, sans-serif; max-width: 500px; margin: 0 auto; padding: 20px;">
         <h2>Password Reset Request</h2>
-        <p>Your reset code: <strong>\${code}</strong></p>
+        <p>Your reset code: <strong>${code}</strong></p>
         <p>This code expires in 15 minutes.</p>
       </div>
-    \`);
-    if (emailResult.demo) console.log(\`🔑 Reset code for \${email}: \${code}\`);
+    `);
+    if (emailResult.demo) console.log(`🔑 Reset code for ${email}: ${code}`);
     res.json({ message: 'Reset code sent to your email.' });
   } catch (err) {
     console.error('Forgot password error:', err);
@@ -251,7 +253,22 @@ app.get('/api/dashboard/stats', authenticate, async (req, res) => {
     }
     const popularProducts = await prisma.product.findMany({ take: 5 });
 
-    res.json({ totalMembers, pendingMembers, totalOrders, pendingOrders, totalProducts, totalEvents, recentMemberships, monthlyData, popularProducts });
+    res.json({
+      totalMembers,
+      pendingMembers,
+      totalOrders,
+      pendingOrders,
+      totalProducts,
+      totalEvents,
+      recentMemberships: recentMemberships.map(m => ({
+        ...m,
+        full_name: m.name || m.full_name || '',
+        location: m.location || 'Lusaka',
+        created_at: m.createdAt || m.created_at || new Date().toISOString()
+      })),
+      monthlyData,
+      popularProducts
+    });
   } catch (err) {
     console.error('Dashboard stats error:', err);
     res.status(500).json({ error: 'Failed to fetch dashboard stats' });
@@ -261,7 +278,13 @@ app.get('/api/dashboard/stats', authenticate, async (req, res) => {
 // ==================== MEMBERSHIP ROUTES ====================
 app.get('/api/memberships', authenticate, async (req, res) => {
   const memberships = await prisma.membership.findMany({ orderBy: { createdAt: 'desc' } });
-  res.json(memberships);
+  const mapped = memberships.map(m => ({
+    ...m,
+    full_name: m.name || m.full_name || '',
+    age_range: m.age || m.age_range || '',
+    created_at: m.createdAt || m.created_at || new Date().toISOString()
+  }));
+  res.json({ memberships: mapped, success: true });
 });
 app.put('/api/memberships/:id', authenticate, async (req, res) => {
   await prisma.membership.update({ where: { id: Number(req.params.id) }, data: { status: req.body.status } });
@@ -275,7 +298,12 @@ app.delete('/api/memberships/:id', authenticate, async (req, res) => {
 // ==================== PRODUCTS ROUTES ====================
 app.get('/api/products', async (req, res) => {
   const products = await prisma.product.findMany({ orderBy: { createdAt: 'desc' } });
-  res.json(products);
+  const mapped = products.map(p => ({
+    ...p,
+    in_stock: p.inStock ?? 1,
+    created_at: p.createdAt || p.created_at || new Date().toISOString()
+  }));
+  res.json({ products: mapped, success: true });
 });
 app.post('/api/products', authenticate, async (req, res) => {
   const { name, description, price, category, sizes, colors, in_stock } = req.body;
@@ -298,7 +326,11 @@ app.delete('/api/products/:id', authenticate, async (req, res) => {
 // ==================== EVENTS ROUTES ====================
 app.get('/api/events', async (req, res) => {
   const events = await prisma.event.findMany({ orderBy: { date: 'asc' } });
-  res.json(events);
+  const mapped = events.map(e => ({
+    ...e,
+    created_at: e.createdAt || e.created_at || new Date().toISOString()
+  }));
+  res.json({ events: mapped, success: true });
 });
 app.post('/api/events', authenticate, async (req, res) => {
   const { title, description, date, time, location, category, highlight } = req.body;
@@ -321,7 +353,11 @@ app.delete('/api/events/:id', authenticate, async (req, res) => {
 // ==================== ORDERS ROUTES ====================
 app.get('/api/orders', authenticate, async (req, res) => {
   const orders = await prisma.order.findMany({ orderBy: { createdAt: 'desc' } });
-  res.json(orders);
+  const mapped = orders.map(o => ({
+    ...o,
+    created_at: o.createdAt || o.created_at || new Date().toISOString()
+  }));
+  res.json({ orders: mapped, success: true });
 });
 app.post('/api/orders', async (req, res) => {
   try {
@@ -346,7 +382,19 @@ app.delete('/api/orders/:id', authenticate, async (req, res) => {
 // ==================== SETTINGS ROUTES ====================
 app.get('/api/settings', async (req, res) => {
   const settings = await prisma.setting.findUnique({ where: { id: 1 } });
-  res.json(settings || {});
+  const s = settings || {};
+  res.json({
+    settings: {
+      ...s,
+      church_name: s.churchName || s.church_name || 'Generation of Value',
+      service_times: s.serviceTimes || s.service_times || 'Sunday: 08:00 - 13:00',
+      word_of_year: s.wordOfYear || s.word_of_year || 'Year of Great Grace'
+    },
+    ...s,
+    church_name: s.churchName || s.church_name || 'Generation of Value',
+    service_times: s.serviceTimes || s.service_times || 'Sunday: 08:00 - 13:00',
+    word_of_year: s.wordOfYear || s.word_of_year || 'Year of Great Grace'
+  });
 });
 app.put('/api/settings', authenticate, async (req, res) => {
   const { church_name, tagline, address, phone, email, whatsapp, service_times, declaration, vision, mission, word_of_year } = req.body;
@@ -361,7 +409,12 @@ app.put('/api/settings', authenticate, async (req, res) => {
 // ==================== CAROUSEL ROUTES ====================
 app.get('/api/carousel', async (req, res) => {
   const slides = await prisma.carouselSlide.findMany({ where: { active: 1 }, orderBy: { orderNum: 'asc' } });
-  res.json(slides);
+  const mapped = slides.map(s => ({
+    ...s,
+    cta_text: s.ctaText || s.cta_text || '',
+    cta_link: s.ctaLink || s.cta_link || ''
+  }));
+  res.json({ slides: mapped, success: true });
 });
 app.put('/api/carousel', authenticate, async (req, res) => {
   const { slides } = req.body;
@@ -388,9 +441,9 @@ app.post('/api/contact', async (req, res) => {
     await prisma.membership.create({ data: { name, email, phone, message, status: 'contact' } });
     const admin = await prisma.adminUser.findFirst();
     if (admin && admin.email) {
-      await sendEmail(admin.email, \`New Contact: \${subject || 'GOV Website'}\`, \`
-        <h2>New Contact Form Submission</h2><p><strong>Name:</strong> \${name}</p><p><strong>Email:</strong> \${email}</p><p><strong>Phone:</strong> \${phone || 'N/A'}</p><p><strong>Message:</strong> \${message}</p>
-      \`);
+      await sendEmail(admin.email, `New Contact: ${subject || 'GOV Website'}`, `
+        <h2>New Contact Form Submission</h2><p><strong>Name:</strong> ${name}</p><p><strong>Email:</strong> ${email}</p><p><strong>Phone:</strong> ${phone || 'N/A'}</p><p><strong>Message:</strong> ${message}</p>
+      `);
     }
     res.json({ success: true });
   } catch (err) {
@@ -405,7 +458,7 @@ app.post('/api/membership', async (req, res) => {
     await prisma.membership.create({ data: { name, email, phone, age, message, status: 'pending' } });
     const admin = await prisma.adminUser.findFirst();
     if (admin && admin.email) {
-      await sendEmail(admin.email, 'New GOV Membership Application', \`<h2>New Application</h2><p><strong>Name:</strong> \${name}</p><p><strong>Email:</strong> \${email}</p>\`);
+      await sendEmail(admin.email, 'New GOV Membership Application', `<h2>New Application</h2><p><strong>Name:</strong> ${name}</p><p><strong>Email:</strong> ${email}</p>`);
     }
     res.json({ success: true });
   } catch (err) {
@@ -419,6 +472,20 @@ app.get('/api/health', (req, res) => {
 });
 
 // Start server
-app.listen(PORT, () => {
-  console.log(\`🚀 GOV Server Running on port \${PORT}\`);
+if (process.env.NODE_ENV !== 'production') {
+  const vite = await createViteServer({
+    server: { middlewareMode: true },
+    appType: 'spa',
+  });
+  app.use(vite.middlewares);
+} else {
+  const distPath = path.join(process.cwd(), 'dist');
+  app.use(express.static(distPath));
+  app.use((req, res) => {
+    res.sendFile(path.join(distPath, 'index.html'));
+  });
+}
+
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`🚀 GOV Server Running on http://0.0.0.0:${PORT}`);
 });

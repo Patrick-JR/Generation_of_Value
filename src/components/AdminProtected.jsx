@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Lock, Mail, Eye, EyeOff, ArrowRight, CheckCircle, XCircle, Loader } from 'lucide-react';
 import './Login.css';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001/api';
+const API_URL = import.meta.env.VITE_API_URL || '/api';
 
 const AdminProtected = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);

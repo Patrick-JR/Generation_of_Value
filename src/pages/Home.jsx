@@ -7,7 +7,7 @@ import './Home.css';
 import heroImg1 from '../images/Praise1.jpg';
 import heroImg2 from '../images/Praise2.jpg';
 import heroImg3 from '../images/behind_church.jpg';
-import youthWorshipImg from '../images/Luckson.jpg';
+import youthWorshipImg from '../images/Praise2.jpg';
 import bishopDeclImg from '../images/Mr_and_Mrs_Bishop.jpg';
 import bishopKarongaImg from '../images/Bishop_Karonga.jpg';
 import churchImg from '../images/behind_church.jpg';
@@ -76,7 +76,7 @@ const Home = () => {
               transition={{ duration: 1.2, ease: "easeInOut" }}
             >
               <div className="hero-image-bg" style={{
-                backgroundImage: `url(${currentSlide === 0 ? heroImg1 : currentSlide === 1 ? heroImg2 : heroImg3})`
+                backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${currentSlide === 0 ? heroImg1 : currentSlide === 1 ? heroImg2 : heroImg3})`
               }}></div>
               <div className="hero-content">
                 <motion.div

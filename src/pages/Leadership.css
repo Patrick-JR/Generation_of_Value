@@ -133,12 +133,15 @@
 }
 
 .leadership-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 4rem;
 }
 
 .leadership-category {
+  flex: 1 1 300px;
+  max-width: 500px;
   text-align: center;
 }
 
@@ -161,9 +164,16 @@
 
 .people-grid,
 .coordinators-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 1.5rem;
+}
+
+.people-grid > *,
+.coordinators-grid > * {
+  flex: 1 1 200px;
+  max-width: 320px;
 }
 
 .person-card {
@@ -239,7 +249,7 @@
 }
 
 .title-nowrap {
-  white-space: nowrap;
+  white-space: normal;
 }
 
 .section-subtitle {
@@ -264,11 +274,17 @@
 }
 
 .executive-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 2rem;
   max-width: 1000px;
   margin: 0 auto;
+}
+
+.executive-grid > * {
+  flex: 1 1 280px;
+  max-width: 350px;
 }
 
 .executive-card {
@@ -344,11 +360,17 @@
 }
 
 .secretariat-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 2rem;
-  max-width: 700px;
+  max-width: 800px;
   margin: 0 auto;
+}
+
+.secretariat-grid > * {
+  flex: 1 1 300px;
+  max-width: 420px;
 }
 
 .secretariat-card {
@@ -407,9 +429,15 @@
 }
 
 .heads-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 2rem;
+}
+
+.heads-grid > * {
+  flex: 1 1 250px;
+  max-width: 380px;
 }
 
 .head-card {
@@ -473,11 +501,17 @@
 }
 
 .vice-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 2rem;
   max-width: 800px;
   margin: 0 auto;
+}
+
+.vice-grid > * {
+  flex: 1 1 200px;
+  max-width: 300px;
 }
 
 .vice-card {
@@ -585,11 +619,6 @@
   .ministries-full-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-
-  .executive-grid {
-    grid-template-columns: repeat(2, 1fr);
-    max-width: 700px;
-  }
 }
 
 @media (max-width: 900px) {
@@ -599,17 +628,7 @@
   }
 
   .leadership-row {
-    grid-template-columns: 1fr;
     gap: 3rem;
-  }
-
-  .executive-grid {
-    grid-template-columns: 1fr;
-    max-width: 400px;
-  }
-
-  .heads-grid {
-    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -635,26 +654,27 @@
     white-space: normal;
   }
 
-  .people-grid,
-  .coordinators-grid,
-  .secretariat-grid,
-  .heads-grid,
-  .vice-grid,
-  .executive-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
+  .ministries-full-grid {
+    grid-template-columns: 1fr;
   }
 
   .secretariat-card {
     flex-direction: column;
     text-align: center;
     padding: 1rem;
+    align-items: center;
   }
 
   .head-card {
     flex-direction: column;
     text-align: center;
     padding: 1rem;
+    align-items: center;
+  }
+  
+  .secretariat-avatar,
+  .head-avatar {
+    margin: 0 auto 1rem;
   }
   
   .executive-card {

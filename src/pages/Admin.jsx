@@ -5,12 +5,12 @@ import {
   LayoutDashboard, Users, Calendar, ShoppingBag, Settings, LogOut,
   Eye, Plus, Trash2, Edit, X, Check, Search, ChevronDown, ChevronUp,
   TrendingUp, DollarSign, UserPlus, CalendarCheck, Bell, Mail, Phone,
-  Image, Key, EyeOff, ShoppingCart, Clock, BarChart3, PieChart, Activity
+  Image, Key, EyeOff, ShoppingCart, Clock, BarChart3, PieChart, Activity, MapPin
 } from 'lucide-react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, PieChart as RechartsPie, Pie, Cell } from 'recharts';
 import './Admin.css';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001/api';
+const API_URL = import.meta.env.VITE_API_URL || '/api';
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -44,28 +44,28 @@ const Admin = () => {
         case 'memberships':
           const memRes = await fetch(`${API_URL}/memberships`, { headers });
           const memData = await memRes.json();
-          setMemberships(memData.memberships);
+          setMemberships(Array.isArray(memData) ? memData : (memData.memberships || []));
           break;
         case 'events':
           const evRes = await fetch(`${API_URL}/events`, { headers });
           const evData = await evRes.json();
-          setEvents(evData.events);
+          setEvents(Array.isArray(evData) ? evData : (evData.events || []));
           break;
         case 'shop':
           const prodRes = await fetch(`${API_URL}/products`, { headers });
           const prodData = await prodRes.json();
-          setProducts(prodData.products);
+          setProducts(Array.isArray(prodData) ? prodData : (prodData.products || []));
           const ordRes = await fetch(`${API_URL}/orders`, { headers });
           const ordData = await ordRes.json();
-          setOrders(ordData.orders);
+          setOrders(Array.isArray(ordData) ? ordData : (ordData.orders || []));
           break;
         case 'settings':
           const setRes = await fetch(`${API_URL}/settings`, { headers });
           const setData = await setRes.json();
-          setSettings(setData.settings);
+          setSettings(setData.settings || setData || {});
           const carRes = await fetch(`${API_URL}/carousel`, { headers });
           const carData = await carRes.json();
-          setCarouselSlides(carData.slides);
+          setCarouselSlides(Array.isArray(carData) ? carData : (carData.slides || []));
           break;
       }
     } catch (error) {
@@ -317,11 +317,11 @@ const DashboardTab = ({ data }) => {
             {data.recentMemberships?.slice(0, 5).map((m, i) => (
               <div key={i} className="recent-item">
                 <div className="recent-avatar">
-                  {m.full_name.charAt(0)}
+                  {(m.full_name || m.name || 'M').charAt(0)}
                 </div>
                 <div className="recent-info">
-                  <span className="recent-name">{m.full_name}</span>
-                  <span className="recent-meta">{m.email} • {m.location}</span>
+                  <span className="recent-name">{m.full_name || m.name}</span>
+                  <span className="recent-meta">{m.email} • {m.location || 'Lusaka'}</span>
                 </div>
                 <span className={`status-badge ${m.status}`}>{m.status}</span>
               </div>

@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Calendar, Clock, MapPin, Heart, Filter, ChevronRight, Image as ImageIcon, Star, Moon, Sun } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Calendar, Clock, MapPin, Heart, Filter, ChevronRight, Image as ImageIcon, Star, Moon, Sun, X } from 'lucide-react';
 import { churchInfo } from '../data/content';
 import './Events.css';
 import heroImg from '../images/Bible_1.JPG';
@@ -17,6 +17,7 @@ const galleryImgs = [img1, img2, img3, img4, img5, img6, img7, img8];
 
 const Events = () => {
   const [activeCategory, setActiveCategory] = useState('All');
+  const [selectedEvent, setSelectedEvent] = useState(null);
 
   const events = [
     {
@@ -27,7 +28,8 @@ const Events = () => {
       location: "Praise Christian Centre Matero",
       description: "Join us for an night of powerful worship, praise, and intimate fellowship with God. A night dedicated to seeking His presence.",
       category: "Special",
-      highlight: false
+      highlight: false,
+      isPast: true
     },
     {
       id: 2,
@@ -37,17 +39,43 @@ const Events = () => {
       location: "Praise Christian Centre Matero",
       description: "A dedicated month of intense prayer and intercession. Every Monday to Friday, we gather to seek God's face for our nation, community, and generation.",
       category: "Monthly",
-      highlight: false
+      highlight: false,
+      isPast: true
     },
     {
       id: 3,
       title: "Youth Sunday",
-      date: "September 6, 2026",
+      date: "September 13, 2026",
       time: "08:00 to 13:00",
       location: "Praise Christian Centre Matero",
       description: "THE BIGGEST EVENT OF THE YEAR! A special Sunday dedicated to the youth. Full youth service with worship, word, and celebration. Don't miss it!",
       category: "Special",
-      highlight: true
+      highlight: true,
+      hasDetails: true,
+      theme: "Be Exceptional",
+      dressCode: "Vintage Excellence",
+      themeScripture: "1 Timothy 4:12",
+      activities: ["Drama", "Poetry", "Dance", "Debate", "Praise and Worship", "Mystery Box"]
+    },
+    {
+      id: 4,
+      title: "Generation of Value Tour",
+      date: "October (Date TBC)",
+      time: "To be communicated",
+      location: "To be communicated",
+      description: "Join us for the highly anticipated Generation of Value Tour! Get ready for an impactful time of fellowship, ministry, and spreading the message of purpose across different locations. More details coming soon.",
+      category: "Special",
+      highlight: false
+    },
+    {
+      id: 5,
+      title: "Transformed Youth Camp",
+      date: "December (Date TBC)",
+      time: "To be communicated",
+      location: "To be communicated",
+      description: "An inter-church youth camp aimed at transforming lives. Fees and exact location to be communicated soon. Don't miss this life-changing experience!",
+      category: "Special",
+      highlight: false
     }
   ];
 
@@ -151,10 +179,16 @@ const Events = () => {
                   </div>
                 </div>
 
-                <button className="event-cta">
-                  Learn More
-                  <ChevronRight size={16} />
-                </button>
+                {event.isPast ? (
+                  <button className="event-cta past-event" disabled>
+                    Already Passed
+                  </button>
+                ) : event.hasDetails ? (
+                  <button className="event-cta" onClick={() => setSelectedEvent(event)}>
+                    Learn More
+                    <ChevronRight size={16} />
+                  </button>
+                ) : null}
               </motion.div>
             ))}
           </motion.div>
@@ -266,6 +300,68 @@ const Events = () => {
           </motion.div>
         </div>
       </section>
+
+      {/* Event Details Modal */}
+      <AnimatePresence>
+        {selectedEvent && (
+          <div className="event-modal-overlay" onClick={() => setSelectedEvent(null)}>
+            <motion.div 
+              className="event-modal-content"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.2 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button className="modal-close" onClick={() => setSelectedEvent(null)}>
+                <X size={24} />
+              </button>
+              
+              <div className="modal-header">
+                <span className="event-category-badge">{selectedEvent.category}</span>
+                <h2>{selectedEvent.title}</h2>
+                <p className="modal-date">{selectedEvent.date}</p>
+              </div>
+              
+              <div className="modal-body">
+                <p className="modal-desc">{selectedEvent.description}</p>
+                
+                {selectedEvent.theme && (
+                  <div className="modal-detail-group">
+                    <h4>Theme</h4>
+                    <p>"{selectedEvent.theme}"</p>
+                  </div>
+                )}
+                
+                {selectedEvent.themeScripture && (
+                  <div className="modal-detail-group">
+                    <h4>Theme Scripture</h4>
+                    <p>{selectedEvent.themeScripture}</p>
+                  </div>
+                )}
+                
+                {selectedEvent.dressCode && (
+                  <div className="modal-detail-group">
+                    <h4>Dress Code</h4>
+                    <p>{selectedEvent.dressCode}</p>
+                  </div>
+                )}
+                
+                {selectedEvent.activities && (
+                  <div className="modal-detail-group">
+                    <h4>Activities Include</h4>
+                    <ul className="modal-activities-list">
+                      {selectedEvent.activities.map((act, i) => (
+                        <li key={i}>{act}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
