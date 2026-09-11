@@ -61,8 +61,8 @@ const Leadership = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
           >
-            <div className="bishop-image">
-              <img src={bishopDeclImg} alt="Bishop Paul Karonga and Wife" style={{ objectPosition: 'top center' }} />
+            <div className="leadership-bishop-image">
+              <img src={bishopDeclImg} alt="Bishop Paul Karonga and Wife" style={{ objectPosition: 'center 15%' }} />
             </div>
             <div className="bishop-info">
               <div className="role-badge">

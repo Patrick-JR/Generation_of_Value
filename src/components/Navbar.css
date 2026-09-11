@@ -183,21 +183,35 @@
   gap: 0.5rem;
 }
 
-.mobile-shop-icon-btn {
+.mobile-shop-icon-btn,
+.mobile-voice-icon-btn {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-  color: var(--black);
   display: flex;
   align-items: center;
   justify-content: center;
   transition: var(--transition);
 }
 
+.mobile-shop-icon-btn {
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  color: var(--black);
+}
+
+.mobile-voice-icon-btn {
+  background: linear-gradient(135deg, #6d28d9, #4c1d95);
+  color: var(--white);
+}
+
 .mobile-shop-icon-btn:hover {
   transform: scale(1.08);
   box-shadow: 0 4px 14px rgba(212, 175, 55, 0.4);
+}
+
+.mobile-voice-icon-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 4px 14px rgba(109, 40, 217, 0.4);
 }
 
 [data-theme="light"] .navbar .mobile-top-actions .theme-toggle {

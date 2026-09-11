@@ -191,7 +191,7 @@ const Shop = () => {
                 <option value="default">Sort: Default</option>
                 <option value="price-low">Price: Low → High</option>
                 <option value="price-high">Price: High → Low</option>
-                <option value="name">Name: A–Z</option>
+                <option value="name">Name: A to Z</option>
               </select>
             </div>
           </div>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Sun, Moon, ShoppingBag, Home, Info, Users, Calendar, Mail } from 'lucide-react';
+import { Sun, Moon, ShoppingBag, Home, Info, Users, Calendar, Mail, MessageSquare } from 'lucide-react';
 import './Navbar.css';
 
 import pccLogo from '../images/PCC_Logo.png';
@@ -34,6 +34,7 @@ const Navbar = () => {
     { name: 'About', path: '/about' },
     { name: 'Leadership', path: '/leadership' },
     { name: 'Events', path: '/events' },
+    { name: 'Voice', path: '/voice' },
     { name: 'Contact', path: '/contact' }
   ];
 
@@ -83,13 +84,16 @@ const Navbar = () => {
               Shop
             </Link>
 
-            {/* Mobile top-right: shop + theme */}
+            {/* Mobile top-right: voice + theme + shop */}
             <div className="mobile-top-actions">
+              <Link to="/voice" className="mobile-voice-icon-btn" aria-label="Voice">
+                <MessageSquare size={20} />
+              </Link>
               <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
                 {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
               </button>
               <Link to="/shop" className="mobile-shop-icon-btn" aria-label="Shop">
-                <ShoppingBag size={22} />
+                <ShoppingBag size={20} />
               </Link>
             </div>
           </div>

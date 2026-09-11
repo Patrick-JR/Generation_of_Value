@@ -344,7 +344,7 @@ const Membership = () => {
                 <blockquote>
                   "For I know the plans I have for you, declares the LORD, plans to prosper you and not to harm you, plans to give you hope and a future."
                 </blockquote>
-                <cite>— Jeremiah 29:11</cite>
+                <cite>, Jeremiah 29:11</cite>
               </div>
             </motion.div>
           </div>

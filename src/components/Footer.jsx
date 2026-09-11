@@ -83,7 +83,7 @@ const Footer = () => {
           <div className="footer-bottom-content">
             <p>&copy; {currentYear} {churchInfo.youthMinistry}. All rights reserved.</p>
             <p className="footer-verse">
-              "{churchInfo.mission}" — Our Mission
+              "{churchInfo.mission}", Our Mission
             </p>
           </div>
         </div>

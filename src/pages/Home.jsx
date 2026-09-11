@@ -24,7 +24,7 @@ const Home = () => {
       secondaryBtn: { text: "Join us this Sunday", link: "/about#church-details" }
     },
     {
-      title: "2026 - Year of Gratitude",
+      title: "2026, Year of Gratitude",
       subtitle: "Giving Thanks to God in All Things",
       description: "This year, we focus on acknowledging God's faithfulness and developing a lifestyle of gratitude",
       primaryBtn: { text: "See Our Products", link: "/shop" },
@@ -219,7 +219,7 @@ const Home = () => {
                   <blockquote className="declaration-quote" style={{ color: 'var(--white)' }}>
                     "{bishopsDeclaration.quote}"
                   </blockquote>
-                  <cite className="declaration-cite">— {bishopsDeclaration.speaker}</cite>
+                  <cite className="declaration-cite">, {bishopsDeclaration.speaker}</cite>
                 </div>
               </div>
             </motion.div>
@@ -383,7 +383,7 @@ const Home = () => {
                 </div>
                 <div className="info-text">
                   <h4>Church Name</h4>
-                  <p>Praise Christian Center - Matero Branch</p>
+                  <p>Praise Christian Center, Matero Branch</p>
                 </div>
               </div>
               <div className="info-item">

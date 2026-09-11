@@ -56,7 +56,7 @@ const About = () => {
               <Quote size={36} />
             </div>
             <blockquote>"{bishopsDeclaration.quote}"</blockquote>
-            <cite>— {bishopsDeclaration.speaker}</cite>
+            <cite>, {bishopsDeclaration.speaker}</cite>
           </motion.div>
         </div>
       </section>
@@ -268,7 +268,7 @@ const About = () => {
                 </div>
                 <div className="info-content">
                   <h4>Church Name</h4>
-                  <p>Praise Christian Center - Matero Branch</p>
+                  <p>Praise Christian Center, Matero Branch</p>
                 </div>
               </div>
 

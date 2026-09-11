@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import bcrypt from 'bcryptjs';
@@ -8,7 +9,7 @@ import { createServer as createViteServer } from 'vite';
 import prisma from './prismaClient.js';
 
 const app = express();
-const PORT = 3000;
+const PORT = 3010;
 const JWT_SECRET = process.env.JWT_SECRET || 'gov-secret-key-change-in-production';
 
 // Email configuration
@@ -462,6 +463,54 @@ app.post('/api/membership', async (req, res) => {
     res.json({ success: true });
   } catch {
     res.status(500).json({ error: 'Failed to submit membership form' });
+  }
+});
+
+// ==================== MYSTERY NOTE (PUBLIC) ====================
+app.post('/api/mystery', async (req, res) => {
+  try {
+    const { message } = req.body;
+    if (!message || !message.trim()) {
+      return res.status(400).json({ error: 'Message cannot be empty.' });
+    }
+    const GOV_EMAIL = 'govpccmateroyouth@gmail.com';
+    const timestamp = new Date().toLocaleString('en-GB', { timeZone: 'Africa/Lusaka' });
+    await sendEmail(GOV_EMAIL, '🔒 New Anonymous Mystery Note — GOV', `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #111827; color: #f9fafb; padding: 2rem; border-radius: 12px; border-top: 5px solid #D4AF37;">
+        <h2 style="color: #D4AF37; margin-bottom: 0.5rem;">🔒 Anonymous Mystery Note</h2>
+        <p style="color: #9ca3af; font-size: 0.85rem; margin-bottom: 1.5rem;">Received on ${timestamp} (Lusaka Time) — The sender is completely anonymous.</p>
+        <div style="background: #1f2937; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #D4AF37; font-size: 1rem; line-height: 1.8; color: #f9fafb; white-space: pre-wrap;">${message}</div>
+        <p style="margin-top: 1.5rem; font-size: 0.8rem; color: #6b7280;">This note was submitted anonymously through the GOV website. Please handle it with confidentiality and prayer.</p>
+      </div>
+    `);
+    res.json({ success: true });
+  } catch (err) {
+    console.error('Mystery note error:', err);
+    res.status(500).json({ error: 'Failed to submit mystery note.' });
+  }
+});
+
+// ==================== FEEDBACK (PUBLIC) ====================
+app.post('/api/feedback', async (req, res) => {
+  try {
+    const { message } = req.body;
+    if (!message || !message.trim()) {
+      return res.status(400).json({ error: 'Feedback cannot be empty.' });
+    }
+    const GOV_EMAIL = 'govpccmateroyouth@gmail.com';
+    const timestamp = new Date().toLocaleString('en-GB', { timeZone: 'Africa/Lusaka' });
+    await sendEmail(GOV_EMAIL, '💬 New Feedback Submitted — GOV Website', `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #111827; color: #f9fafb; padding: 2rem; border-radius: 12px; border-top: 5px solid #D4AF37;">
+        <h2 style="color: #D4AF37; margin-bottom: 0.5rem;">💬 New Feedback</h2>
+        <p style="color: #9ca3af; font-size: 0.85rem; margin-bottom: 1.5rem;">Submitted on ${timestamp} (Lusaka Time)</p>
+        <div style="background: #1f2937; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #D4AF37; font-size: 1rem; line-height: 1.8; color: #f9fafb; white-space: pre-wrap;">${message}</div>
+        <p style="margin-top: 1.5rem; font-size: 0.8rem; color: #6b7280;">This feedback was submitted through the GOV website feedback box.</p>
+      </div>
+    `);
+    res.json({ success: true });
+  } catch (err) {
+    console.error('Feedback error:', err);
+    res.status(500).json({ error: 'Failed to submit feedback.' });
   }
 });
 

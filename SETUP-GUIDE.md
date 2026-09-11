@@ -28,13 +28,13 @@ npm install
 npm run dev:all
 
 # OR start them separately:
-npm run dev          # Frontend (http://localhost:5173)
+npm run dev          # Application (http://localhost:3010)
 npm run dev:server   # Backend (http://localhost:3001)
 ```
 
 ### Step 4: Open in Browser
-- **Website**: http://localhost:5173
-- **Admin**: http://localhost:5173/admin
+- **Website**: http://localhost:3010
+- **Admin**: http://localhost:3010/admin
 - **Login**: `admin` / `1234`
 
 ---

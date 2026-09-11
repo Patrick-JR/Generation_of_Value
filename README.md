@@ -49,7 +49,7 @@ npm run dev:all
 ```
 
 ### Access
-- Frontend: http://localhost:5173
+- Application: http://localhost:3010
 - Backend API: http://localhost:3001
 
 ## Admin Login

@@ -1,7 +1,7 @@
 let prisma;
 
 function createMockPrisma() {
-  console.warn('[AI Studio] Database not connected or DATABASE_URL missing — using in-memory store');
+  console.warn('[GOV Server] Database not connected or DATABASE_URL missing — using in-memory store');
   const store = {
     adminUser: [],
     setting: [],

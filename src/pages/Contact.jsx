@@ -111,7 +111,7 @@ const Contact = () => {
                 <Clock size={28} />
               </div>
               <h3>Service Times</h3>
-              <p>Sundays: 09:00 AM - 12:00 PM</p>
+              <p>Sundays: 09:00 AM to 12:00 PM</p>
             </motion.div>
           </div>
         </div>
@@ -144,7 +144,7 @@ const Contact = () => {
                 </div>
                 <div className="info-content">
                   <h4>Church Name</h4>
-                  <p>Praise Christian Center - Matero Branch</p>
+                  <p>Praise Christian Center, Matero Branch</p>
                 </div>
               </div>
 

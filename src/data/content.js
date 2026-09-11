@@ -28,9 +28,9 @@ export const aboutContent = {
     "Kingdom impact",
     "Intentional service"
   ],
-  vision: "To equip the saints for the work of ministry. — Ephesians 4:12",
+  vision: "To equip the saints for the work of ministry, Ephesians 4:12",
   mission: "Winning 100,000 souls for Christ",
-  wordOfYear: "2026 – The Year of Giving Gratitude to God",
+  wordOfYear: "2026, The Year of Giving Gratitude to God",
   wordOfYearFocus: [
     "Acknowledge God in all things",
     "Develop thankful hearts",
@@ -78,8 +78,8 @@ export const leadership = {
     { name: "Mr. & Mrs. Wamulume", role: "Youth Deacons", description: "Support leadership governance, order, discipline, and administration." }
   ],
   coordinators: [
-    { name: "Rabeka", role: "Youth Coordinator", description: "Coordinates youth activities and events." },
-    { name: "Nancy", role: "Youth Coordinator", description: "Coordinates youth activities and events." }
+    { name: "Rabecca Liuwa", role: "Youth Coordinator", description: "Coordinates youth activities and events." },
+    { name: "Nancy Mwansa", role: "Youth Coordinator", description: "Coordinates youth activities and events." }
   ],
   executives: [
     { name: "Clement Chisenga", role: "Youth Chairperson", description: "Coordinates youth activities, planning, and leadership execution." },
