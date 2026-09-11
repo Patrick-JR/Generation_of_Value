@@ -3,11 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   LayoutDashboard, Users, Calendar, ShoppingBag, Settings, LogOut,
-  Eye, Plus, Trash2, Edit, X, Check, Search, ChevronDown, ChevronUp,
-  TrendingUp, DollarSign, UserPlus, CalendarCheck, Bell, Mail, Phone,
-  Image, Key, EyeOff, ShoppingCart, Clock, BarChart3, PieChart, Activity, MapPin
+  Plus, Trash2, Edit, X, Search,
+  TrendingUp, DollarSign, UserPlus, Bell, Mail, Phone,
+  Image, Key, ShoppingCart, Clock, Activity, MapPin
 } from 'lucide-react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, PieChart as RechartsPie, Pie, Cell } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts';
 import './Admin.css';
 
 const API_URL = import.meta.env.VITE_API_URL || '/api';
@@ -15,9 +15,8 @@ const API_URL = import.meta.env.VITE_API_URL || '/api';
 const Admin = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('dashboard');
-  const [isEditing, setIsEditing] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [token, setToken] = useState(sessionStorage.getItem('gov_admin_token'));
+  const [token] = useState(sessionStorage.getItem('gov_admin_token'));
   const [dashboardData, setDashboardData] = useState(null);
   
   // Data states
@@ -152,8 +151,6 @@ const Admin = () => {
 const DashboardTab = ({ data }) => {
   if (!data) return <div>Loading...</div>;
 
-  const COLORS = ['#D4AF37', '#B8860B', '#FFD700', '#F4D03F'];
-
   const membershipChartData = data.membershipByMonth.map(m => ({
     month: m.month.split('-')[1],
     count: m.count
@@ -163,12 +160,6 @@ const DashboardTab = ({ data }) => {
     month: m.month.split('-')[1],
     revenue: m.revenue || 0
   }));
-
-  const pieData = [
-    { name: 'Pending', value: data.recentMemberships?.filter(m => m.status === 'pending').length || 0 },
-    { name: 'Approved', value: data.recentMemberships?.filter(m => m.status === 'approved').length || 0 },
-    { name: 'Contacted', value: data.recentMemberships?.filter(m => m.status === 'contacted').length || 0 }
-  ].filter(d => d.value > 0);
 
   return (
     <motion.div
@@ -965,30 +956,16 @@ const ShopTab = ({ products, orders, token, refresh }) => {
 };
 
 // Settings Tab Component
-const SettingsTab = ({ settings, slides, token, refresh }) => {
+const SettingsTab = ({ settings, slides, token }) => {
   const [formData, setFormData] = useState({
-    word_of_year: '',
-    mission: '',
-    church_name: '',
-    email: '',
-    phone: '',
-    address: '',
-    service_time: ''
+    word_of_year: settings?.word_of_year || '',
+    mission: settings?.mission || '',
+    church_name: settings?.church_name || '',
+    email: settings?.email || '',
+    phone: settings?.phone || '',
+    address: settings?.address || '',
+    service_time: settings?.service_time || ''
   });
-
-  useEffect(() => {
-    if (settings) {
-      setFormData({
-        word_of_year: settings.word_of_year || '',
-        mission: settings.mission || '',
-        church_name: settings.church_name || '',
-        email: settings.email || '',
-        phone: settings.phone || '',
-        address: settings.address || '',
-        service_time: settings.service_time || ''
-      });
-    }
-  }, [settings]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

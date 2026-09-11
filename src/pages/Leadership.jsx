@@ -1,9 +1,9 @@
 import { motion } from 'framer-motion';
-import { Cross, Crown, Shield, User, Users, Music, Palette, Video, Megaphone, Heart, Trophy, Truck } from 'lucide-react';
+import { Crown, Shield, User, Users, Music, Palette, Video, Megaphone, Heart, Trophy, Truck } from 'lucide-react';
 import { leadership, ministries, churchInfo } from '../data/content';
 import './Leadership.css';
 import heroImg from '../images/behind_church.jpg';
-import bishopKarongaImg from '../images/Bishop_Karonga.jpg';
+import bishopDeclImg from '../images/Mr_and_Mrs_Bishop.jpg';
 
 const iconMap = {
   music: Music,
@@ -62,8 +62,7 @@ const Leadership = () => {
             viewport={{ once: true }}
           >
             <div className="bishop-image">
-              <img src={bishopKarongaImg} alt="Bishop Paul Karonga" />
-              <div className="image-ring"></div>
+              <img src={bishopDeclImg} alt="Bishop Paul Karonga and Wife" style={{ objectPosition: 'top center' }} />
             </div>
             <div className="bishop-info">
               <div className="role-badge">

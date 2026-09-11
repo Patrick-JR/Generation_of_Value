@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ShoppingBag, Heart, Eye, Search, X, Phone, Send, Check, Plus, Minus, ChevronDown, ChevronUp, Filter, User, MessageSquare, CheckCircle } from 'lucide-react';
+import { ShoppingBag, Heart, Eye, Search, X, Phone, Send, Check, Plus, Minus, User, MessageSquare, CheckCircle } from 'lucide-react';
 import { shopProducts, churchInfo } from '../data/content';
 import { submitOrder } from '../services/api';
 import './Shop.css';

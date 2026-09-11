@@ -145,7 +145,7 @@ if (!process.env.DATABASE_URL) {
   try {
     const { PrismaClient } = await import('@prisma/client');
     prisma = new PrismaClient();
-  } catch (err) {
+  } catch {
     prisma = createMockPrisma();
   }
 }

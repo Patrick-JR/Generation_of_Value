@@ -10,7 +10,6 @@ import prisma from './prismaClient.js';
 const app = express();
 const PORT = 3000;
 const JWT_SECRET = process.env.JWT_SECRET || 'gov-secret-key-change-in-production';
-const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:3000';
 
 // Email configuration
 const EMAIL_HOST = process.env.EMAIL_HOST || 'smtp.gmail.com';
@@ -132,7 +131,7 @@ const authenticate = (req, res, next) => {
     const decoded = jwt.verify(token, JWT_SECRET);
     req.adminId = decoded.id;
     next();
-  } catch (err) {
+  } catch {
     return res.status(401).json({ error: 'Invalid token' });
   }
 };
@@ -222,7 +221,7 @@ app.get('/api/auth/me', authenticate, async (req, res) => {
     });
     if (user) res.json(user);
     else res.status(404).json({ error: 'User not found' });
-  } catch (err) {
+  } catch {
     res.status(500).json({ error: 'Server error' });
   }
 });
@@ -366,7 +365,7 @@ app.post('/api/orders', async (req, res) => {
       data: { name, phone, items: typeof items === 'string' ? items : JSON.stringify(items), total }
     });
     res.json({ success: true, order });
-  } catch (err) {
+  } catch {
     res.status(500).json({ error: 'Order failed' });
   }
 });
@@ -446,7 +445,7 @@ app.post('/api/contact', async (req, res) => {
       `);
     }
     res.json({ success: true });
-  } catch (err) {
+  } catch {
     res.status(500).json({ error: 'Failed to submit contact form' });
   }
 });
@@ -461,7 +460,7 @@ app.post('/api/membership', async (req, res) => {
       await sendEmail(admin.email, 'New GOV Membership Application', `<h2>New Application</h2><p><strong>Name:</strong> ${name}</p><p><strong>Email:</strong> ${email}</p>`);
     }
     res.json({ success: true });
-  } catch (err) {
+  } catch {
     res.status(500).json({ error: 'Failed to submit membership form' });
   }
 });

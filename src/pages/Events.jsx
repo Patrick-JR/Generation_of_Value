@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Calendar, Clock, MapPin, Heart, Filter, ChevronRight, Image as ImageIcon, Star, Moon, Sun, X } from 'lucide-react';
-import { churchInfo } from '../data/content';
 import './Events.css';
 import heroImg from '../images/Bible_1.JPG';
 import img1 from '../images/Bible_1.JPG';

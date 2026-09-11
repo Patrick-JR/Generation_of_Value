@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Lock, Mail, Eye, EyeOff, ArrowRight, CheckCircle, XCircle, Loader } from 'lucide-react';
 import './Login.css';
@@ -7,30 +6,7 @@ import './Login.css';
 const API_URL = import.meta.env.VITE_API_URL || '/api';
 
 const AdminProtected = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isChecking, setIsChecking] = useState(true);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const token = sessionStorage.getItem('gov_admin_token');
-    if (token) {
-      setIsAuthenticated(true);
-    }
-    setIsChecking(false);
-  }, []);
-
-  const handleLogout = () => {
-    sessionStorage.removeItem('gov_admin_token');
-    setIsAuthenticated(false);
-  };
-
-  if (isChecking) {
-    return (
-      <div className="login-loading">
-        <div className="loading-spinner"></div>
-      </div>
-    );
-  }
+  const [isAuthenticated, setIsAuthenticated] = useState(() => !!sessionStorage.getItem('gov_admin_token'));
 
   if (!isAuthenticated) {
     return <LoginPage onLogin={() => setIsAuthenticated(true)} />;
@@ -70,7 +46,7 @@ const LoginPage = ({ onLogin }) => {
       } else {
         setError(data.error || 'Invalid credentials');
       }
-    } catch (err) {
+    } catch {
       setError('Unable to connect to server. Please start the backend server.');
     }
 
@@ -101,7 +77,7 @@ const LoginPage = ({ onLogin }) => {
       } else {
         setError(data.error || 'Failed to send reset code');
       }
-    } catch (err) {
+    } catch {
       setError('Unable to connect to server. Please start the backend server.');
     }
 
@@ -145,7 +121,7 @@ const LoginPage = ({ onLogin }) => {
       } else {
         setError(data.error || 'Invalid or expired code');
       }
-    } catch (err) {
+    } catch {
       setError('Unable to connect to server.');
     }
 
