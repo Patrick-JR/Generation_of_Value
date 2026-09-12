@@ -76,7 +76,7 @@ const Home = () => {
               transition={{ duration: 1.2, ease: "easeInOut" }}
             >
               <div className="hero-image-bg" style={{
-                backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${currentSlide === 0 ? heroImg1 : currentSlide === 1 ? heroImg2 : heroImg3})`
+                backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.45) 65%, rgba(0,0,0,0.85) 100%), linear-gradient(135deg, rgba(10,5,0,0.5) 0%, rgba(212,175,55,0.06) 50%, rgba(0,0,0,0.55) 100%), url(${currentSlide === 0 ? heroImg1 : currentSlide === 1 ? heroImg2 : heroImg3})`
               }}></div>
               <div className="hero-content">
                 <motion.div

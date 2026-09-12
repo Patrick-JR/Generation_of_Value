@@ -9,6 +9,7 @@
   height: 350px;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .events-hero .hero-bg {
@@ -33,6 +34,8 @@
   z-index: 10;
   text-align: center;
   padding: 2rem;
+  margin: 0 auto;
+  max-width: 800px;
 }
 
 .events-hero h1 {
@@ -137,6 +140,89 @@
   background: var(--gold);
   border-color: var(--gold);
   color: var(--black);
+}
+
+/* Calendar Download Banner */
+.calendar-download-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-card);
+  border: 2px dashed var(--border-color);
+  border-radius: 20px;
+  padding: 1.5rem 2rem;
+  margin-bottom: 3rem;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.download-info {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.download-icon-wrap {
+  width: 50px;
+  height: 50px;
+  border-radius: 14px;
+  background: rgba(212, 175, 55, 0.15);
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.download-text h3 {
+  font-size: 1.15rem;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.download-text p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.download-action {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-items: flex-end;
+}
+
+.download-btn {
+  padding: 0.7rem 1.5rem;
+  border-radius: 12px;
+}
+
+.download-msg {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.1);
+  padding: 0.5rem 0.85rem;
+  border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  .calendar-download-banner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .download-action {
+    width: 100%;
+    align-items: flex-start;
+  }
+  .download-btn {
+    width: 100%;
+  }
+  .download-msg {
+    width: 100%;
+  }
 }
 
 .events-grid {

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Calendar, Clock, MapPin, Heart, Filter, ChevronRight, Image as ImageIcon, Star, Moon, Sun, X } from 'lucide-react';
+import { Calendar, Clock, MapPin, Heart, Filter, ChevronRight, Image as ImageIcon, Star, Moon, Sun, X, Download, FileText, AlertCircle } from 'lucide-react';
 import './Events.css';
 import heroImg from '../images/Bible_1.JPG';
 import img1 from '../images/Bible_1.JPG';
@@ -17,6 +17,7 @@ const galleryImgs = [img1, img2, img3, img4, img5, img6, img7, img8];
 const Events = () => {
   const [activeCategory, setActiveCategory] = useState('All');
   const [selectedEvent, setSelectedEvent] = useState(null);
+  const [calendarMsg, setCalendarMsg] = useState('');
 
   const events = [
     {
@@ -135,6 +136,42 @@ const Events = () => {
               ))}
             </div>
           </div>
+
+          <motion.div 
+            className="calendar-download-banner"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <div className="download-info">
+              <div className="download-icon-wrap">
+                <FileText size={24} />
+              </div>
+              <div className="download-text">
+                <h3>Download GOV 2026 Calendar</h3>
+                <p>Get the complete yearly schedule of all youth activities.</p>
+              </div>
+            </div>
+            <div className="download-action">
+              <button 
+                className="btn btn-primary download-btn" 
+                onClick={() => setCalendarMsg('The calendar is not yet uploaded, please check back tomorrow.')}
+              >
+                <Download size={18} />
+                Download DOCX
+              </button>
+              {calendarMsg && (
+                <motion.div 
+                  className="download-msg"
+                  initial={{ opacity: 0, y: -5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                >
+                  <AlertCircle size={16} />
+                  <span>{calendarMsg}</span>
+                </motion.div>
+              )}
+            </div>
+          </motion.div>
 
           <motion.div
             className="events-grid"
