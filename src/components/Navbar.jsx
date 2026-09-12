@@ -99,8 +99,9 @@ const Navbar = () => {
               <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
                 {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
               </button>
-              <Link to="/shop" className="mobile-shop-icon-btn" aria-label="Shop">
-                <ShoppingBag size={20} />
+              <Link to="/shop" className="mobile-shop-icon-btn with-text" aria-label="Shop">
+                <ShoppingBag size={18} />
+                <span className="mobile-shop-text">Shop</span>
               </Link>
             </div>
           </div>

@@ -56,7 +56,7 @@ const Shop = () => {
   const [selectedSize, setSelectedSize] = useState('');
   const [selectedColor, setSelectedColor] = useState('');
   const [quantity, setQuantity] = useState(1);
-  const [orderForm, setOrderForm] = useState({ name: '', phone: '', message: '' });
+  const [orderForm, setOrderForm] = useState({ name: '', phone: '' });
   const [errors, setErrors] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -69,7 +69,7 @@ const Shop = () => {
     setSelectedSize(product.sizes[0]);
     setSelectedColor(product.colors[0]);
     setQuantity(1);
-    setOrderForm({ name: '', phone: '', message: '' });
+    setOrderForm({ name: '', phone: '' });
     setErrors({});
     setIsSubmitted(false);
     setFormStep(1);
@@ -108,8 +108,7 @@ const Shop = () => {
     `*Total:* K${orderProduct.price * quantity}\n` +
     `----------------------------\n` +
     `*Name:* ${orderForm.name}\n` +
-    `*Phone:* ${orderForm.phone}\n` +
-    (orderForm.message ? `*Note:* ${orderForm.message}\n` : '');
+    `*Phone:* ${orderForm.phone}\n`;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -128,7 +127,7 @@ const Shop = () => {
         color: selectedColor,
         size: selectedSize,
         quantity,
-        customer: { name: orderForm.name, phone: orderForm.phone, message: orderForm.message }
+        customer: { name: orderForm.name, phone: orderForm.phone }
       });
     } catch {
       // Backend unavailable — still proceed to WhatsApp
@@ -514,20 +513,6 @@ const Shop = () => {
                         className={errors.phone ? 'input-error' : ''}
                       />
                       {errors.phone && <span className="field-error">{errors.phone}</span>}
-                    </div>
-
-                    {/* Note */}
-                    <div className="form-group">
-                      <label htmlFor="order-msg">
-                        <MessageSquare size={14} /> Note <span className="optional">(optional)</span>
-                      </label>
-                      <textarea
-                        id="order-msg"
-                        placeholder="Any special requests or delivery notes..."
-                        value={orderForm.message}
-                        onChange={(e) => setOrderForm({ ...orderForm, message: e.target.value })}
-                        rows={2}
-                      />
                     </div>
 
                     {/* Total */}

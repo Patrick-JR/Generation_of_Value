@@ -9,7 +9,7 @@ import { createServer as createViteServer } from 'vite';
 import prisma from './prismaClient.js';
 
 const app = express();
-const PORT = 3010;
+const PORT = process.env.PORT || 3000;
 const JWT_SECRET = process.env.JWT_SECRET || 'gov-secret-key-change-in-production';
 
 // Email configuration

@@ -6,7 +6,7 @@
   bottom: 0;
   background: rgba(0, 0, 0, 0.75);
   backdrop-filter: blur(5px);
-  z-index: 1000;
+  z-index: 2000;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -21,21 +21,24 @@
   width: 90%;
   max-width: 400px;
   position: relative;
-  padding: 2rem;
+  padding: 1.5rem;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  max-height: 85vh;
+  overflow-y: auto;
+  z-index: 1201; /* Ensure above mobile navbar */
 }
 
 .join-modal-header h2 {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   margin-bottom: 0.5rem;
   color: var(--white);
 }
 
 .join-modal-header p {
   color: var(--text-light);
-  font-size: 0.95rem;
-  margin-bottom: 1.5rem;
-  line-height: 1.5;
+  font-size: 0.85rem;
+  margin-bottom: 1.25rem;
+  line-height: 1.4;
 }
 
 .join-modal-header strong {
@@ -45,7 +48,7 @@
 .join-form {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1rem;
 }
 
 .join-form .form-group {
@@ -74,10 +77,10 @@
 .join-form textarea {
   background: rgba(0, 0, 0, 0.3);
   border: 1px solid var(--border);
-  padding: 0.9rem 1rem;
+  padding: 0.75rem 0.85rem;
   border-radius: 8px;
   color: var(--white);
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   transition: all 0.3s ease;
 }
 
@@ -94,11 +97,12 @@
 
 .submit-join-btn {
   width: 100%;
-  padding: 1rem;
+  padding: 0.8rem;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  font-size: 0.9rem;
   font-weight: 600;
   margin-top: 0.5rem;
 }
@@ -123,15 +127,16 @@
 }
 
 .join-success h2 {
-  font-size: 1.8rem;
-  margin-bottom: 0.75rem;
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
   color: var(--white);
 }
 
 .join-success p {
+  font-size: 0.85rem;
   color: var(--text-light);
-  line-height: 1.6;
-  margin-bottom: 2rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
 }
 
 .join-success .btn {
