@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Lock, MessageCircle, Send, CheckCircle, AlertCircle, Flame, Star, X, Shield } from 'lucide-react';
 import { submitMysteryNote, submitFeedback } from '../services/api';
@@ -60,6 +61,10 @@ const Voice = () => {
 
   return (
     <div className="voice-page">
+      <Helmet>
+        <title>Your Voice – GOV | Generation of Value Praise Christian Centre Matero</title>
+        <meta name="description" content="Share anonymous mystery notes or feedback directly with GOV leadership. Your voice matters — speak freely, safely, and confidentially." />
+      </Helmet>
 
       {/* ── Hero ── */}
       <section className="voice-hero">

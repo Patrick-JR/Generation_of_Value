@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Clock, MessageCircle, Send } from 'lucide-react';
 import { churchInfo } from '../data/content';
@@ -35,6 +36,10 @@ const Contact = () => {
 
   return (
     <div className="contact-page">
+      <Helmet>
+        <title>Contact GOV | Generation of Value – Praise Christian Centre Matero</title>
+        <meta name="description" content="Get in touch with Generation of Value (GOV). Contact us via email, phone, or WhatsApp. We'd love to hear from you and welcome you to our community." />
+      </Helmet>
       {/* Hero */}
       <section className="contact-hero">
         <div className="hero-bg">

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { User, Mail, Phone, MapPin, Heart, Users, CheckCircle, Send, Loader } from 'lucide-react';
 import { churchInfo, ministries } from '../data/content';
@@ -80,6 +81,10 @@ const Membership = () => {
 
   return (
     <div className="membership-page">
+      <Helmet>
+        <title>Join GOV – Membership | Generation of Value Praise Christian Centre Matero</title>
+        <meta name="description" content="Register to become a member of Generation of Value (GOV). Join the youth ministry of Praise Christian Centre Matero and discover your purpose in Christ." />
+      </Helmet>
       {/* Hero */}
       <section className="membership-hero">
         <div className="hero-bg">
@@ -227,13 +232,13 @@ const Membership = () => {
                     </div>
 
                     <div className="form-group">
-                      <label>Ministry Interest</label>
+                      <label>Department Interest</label>
                       <select
                         name="ministryInterest"
                         value={formData.ministryInterest}
                         onChange={handleChange}
                       >
-                        <option value="">Select a ministry (optional)</option>
+                        <option value="">Select a department (optional)</option>
                         {ministries.map((ministry, index) => (
                           <option key={index} value={ministry.name}>{ministry.name}</option>
                         ))}
@@ -308,7 +313,7 @@ const Membership = () => {
                   </li>
                   <li>
                     <CheckCircle size={20} />
-                    <span>Serve in various ministries</span>
+                    <span>Serve in various departments</span>
                   </li>
                   <li>
                     <CheckCircle size={20} />

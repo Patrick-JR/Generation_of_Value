@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { Cross, Target, Eye, Heart, Sparkles, Quote, ArrowRight, Users, BookOpen, MapPin, Clock, Calendar } from 'lucide-react';
 import { churchInfo, bishopsDeclaration, aboutContent } from '../data/content';
 import './About.css';
@@ -23,6 +24,10 @@ const About = () => {
 
   return (
     <div className="about-page">
+      <Helmet>
+        <title>About GOV – Generation of Value | Praise Christian Centre Matero</title>
+        <meta name="description" content="Learn about Generation of Value (GOV), the official youth ministry of Praise Christian Centre Matero. Discover our vision, mission, core values, and word of the year for 2026." />
+      </Helmet>
       {/* Hero */}
       <section className="about-hero">
         <div className="hero-bg">

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Calendar, Clock, MapPin, Heart, Filter, ChevronRight, Image as ImageIcon, Star, Moon, Sun, X, Download, FileText, AlertCircle } from 'lucide-react';
 import './Events.css';
@@ -87,6 +88,10 @@ const Events = () => {
 
   return (
     <div className="events-page">
+      <Helmet>
+        <title>Events – GOV | Generation of Value Praise Christian Centre Matero</title>
+        <meta name="description" content="Stay updated on Generation of Value (GOV) events including Youth Sunday, Prayer Nights, the GOV Tour, Youth Camp, and more. Mark your calendar!" />
+      </Helmet>
       {/* Hero */}
       <section className="events-hero">
         <div className="hero-bg">
@@ -246,10 +251,11 @@ const Events = () => {
 
           <div className="event-types-grid">
             {[
-              { icon: Heart, title: 'Youth Worship', desc: 'Spiritual growth and praise' },
-              { icon: Moon, title: 'Night Vigils', desc: 'Extended prayer sessions' },
-              { icon: Sun, title: 'Sunday Services', desc: 'Weekly worship gatherings' },
-              { icon: Calendar, title: 'Month of Prayer', desc: 'Dedicated intercession' }
+              { icon: Heart, title: 'Youth Worship Night', desc: 'Spiritual growth and praise' },
+              { icon: MapPin, title: 'Evangelism Visits', desc: 'Spreading the gospel in our community' },
+              { icon: Sun, title: 'Youth Services', desc: 'Weekly youth worship gatherings' },
+              { icon: Calendar, title: 'Month of Prayer', desc: 'Dedicated intercession' },
+              { icon: Star, title: 'Talent Development', desc: 'Nurturing gifts and skills' }
             ].map((type, index) => (
               <motion.div
                 key={index}
@@ -285,8 +291,8 @@ const Events = () => {
             </div>
             <div className="stat-divider"></div>
             <div className="stat-item">
-              <span className="stat-number">8</span>
-              <span className="stat-label">Ministries</span>
+              <span className="stat-number">9</span>
+              <span className="stat-label">Departments</span>
             </div>
             <div className="stat-divider"></div>
             <div className="stat-item">

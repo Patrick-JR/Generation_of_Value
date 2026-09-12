@@ -1,9 +1,16 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Sun, Moon, ShoppingBag, Home, Info, Users, Calendar, Mail, MessageSquare } from 'lucide-react';
+import { Sun, Moon, ShoppingBag, Home, Info, Users, Calendar, Mail } from 'lucide-react';
 import './Navbar.css';
 
 import pccLogo from '../images/PCC_Logo.png';
+
+const SpeakIcon = ({ size = 20 }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+    <text x="12" y="15" fontSize="12" fontWeight="bold" textAnchor="middle" fill="currentColor" stroke="none">S</text>
+  </svg>
+);
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -34,7 +41,7 @@ const Navbar = () => {
     { name: 'About', path: '/about' },
     { name: 'Leadership', path: '/leadership' },
     { name: 'Events', path: '/events' },
-    { name: 'Voice', path: '/voice' },
+    { name: 'Speak', path: '/voice' },
     { name: 'Contact', path: '/contact' }
   ];
 
@@ -86,8 +93,8 @@ const Navbar = () => {
 
             {/* Mobile top-right: voice + theme + shop */}
             <div className="mobile-top-actions">
-              <Link to="/voice" className="mobile-voice-icon-btn" aria-label="Voice">
-                <MessageSquare size={20} />
+              <Link to="/voice" className="mobile-voice-icon-btn" aria-label="Speak">
+                <SpeakIcon size={20} />
               </Link>
               <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
                 {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}

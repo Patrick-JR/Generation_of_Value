@@ -45,7 +45,7 @@ const Footer = () => {
             </div>
 
             <div className="footer-links-group">
-              <h4>Our Ministries</h4>
+              <h4>Our Departments</h4>
               <ul className="footer-links">
                 <li><Link to="/leadership">Praise & Worship</Link></li>
                 <li><Link to="/leadership">Creative Arts</Link></li>

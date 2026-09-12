@@ -1,6 +1,9 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Crown, Shield, User, Users, Music, Palette, Video, Megaphone, Heart, Trophy, Truck } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
+import { Crown, Shield, User, Users, Music, Palette, Video, Megaphone, Heart, Trophy, Truck, ArrowUpRight } from 'lucide-react';
 import { leadership, ministries, churchInfo } from '../data/content';
+import JoinModal from '../components/JoinModal';
 import './Leadership.css';
 import heroImg from '../images/behind_church.jpg';
 import bishopDeclImg from '../images/Mr_and_Mrs_Bishop.jpg';
@@ -17,6 +20,8 @@ const iconMap = {
 };
 
 const Leadership = () => {
+  const [joinModalDept, setJoinModalDept] = useState(null);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -32,6 +37,10 @@ const Leadership = () => {
 
   return (
     <div className="leadership-page">
+      <Helmet>
+        <title>Leadership – GOV | Generation of Value Praise Christian Centre Matero</title>
+        <meta name="description" content="Meet the leadership team of Generation of Value (GOV) — the bishops, executives, department heads, and ministry leaders guiding the youth ministry of Praise Christian Centre Matero." />
+      </Helmet>
       {/* Hero */}
       <section className="leadership-hero">
         <div className="hero-bg">
@@ -340,7 +349,7 @@ const Leadership = () => {
         </div>
       </section>
 
-      {/* Ministries */}
+      {/* Departments */}
       <section className="section ministries-full-section">
         <div className="container">
           <motion.div
@@ -350,7 +359,7 @@ const Leadership = () => {
             viewport={{ once: true }}
           >
             <span className="section-badge">Serve With Us</span>
-            <h2>Our Ministries & Departments</h2>
+            <h2>Our Departments</h2>
             <p className="section-subtitle">Find where you can serve and grow</p>
           </motion.div>
 
@@ -374,12 +383,21 @@ const Leadership = () => {
                   </div>
                   <h3>{ministry.name}</h3>
                   <p>{ministry.description}</p>
+                  <button onClick={() => setJoinModalDept(ministry.name)} className="ministry-join-btn">
+                    Join <ArrowUpRight size={14} />
+                  </button>
                 </motion.div>
               );
             })}
           </motion.div>
         </div>
       </section>
+
+      <JoinModal 
+        isOpen={!!joinModalDept} 
+        onClose={() => setJoinModalDept(null)} 
+        department={joinModalDept} 
+      />
     </div>
   );
 };

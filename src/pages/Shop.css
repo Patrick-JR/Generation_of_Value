@@ -447,11 +447,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1050;
+  z-index: 1200;
   padding: 1rem;
-  /* On mobile, leave room for both navbars */
-  padding-top: 76px;
-  padding-bottom: 76px;
 }
 
 /* Shared close button */
@@ -481,10 +478,10 @@
 ───────────────────────────────────────── */
 .order-modal {
   background: #fff;
-  border-radius: 24px;
+  border-radius: 20px;
   width: 100%;
-  max-width: 500px;
-  max-height: 90vh;
+  max-width: 460px;
+  max-height: 92vh;
   overflow-y: auto;
   position: relative;
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
@@ -499,16 +496,16 @@
 .order-product-strip {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 0.75rem 1.25rem;
+  gap: 0.6rem;
+  padding: 0.6rem 1rem;
   background: linear-gradient(135deg, #0f172a, #1e293b);
-  border-radius: 24px 24px 0 0;
+  border-radius: 20px 20px 0 0;
 }
 
 .order-product-thumb {
-  width: 50px;
-  height: 50px;
-  border-radius: 12px;
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
   object-fit: cover;
   object-position: center top;
   border: 2px solid rgba(212, 175, 55, 0.4);
@@ -516,24 +513,24 @@
 }
 
 .order-product-meta h3 {
-  font-size: 1rem;
+  font-size: 0.88rem;
   font-weight: 700;
   color: #fff;
-  margin-bottom: 0.15rem;
+  margin-bottom: 0.1rem;
 }
 
 .order-product-price {
-  font-size: 1.25rem;
+  font-size: 1rem;
   font-weight: 800;
   color: #D4AF37;
 }
 
 /* The form itself */
 .order-form {
-  padding: 1rem 1.25rem;
+  padding: 0.75rem 1rem;
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
+  gap: 0.45rem;
 }
 
 .form-section-label {
@@ -556,14 +553,14 @@
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.25rem;
 }
 
 .form-group label {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
-  font-size: 0.85rem;
+  gap: 0.35rem;
+  font-size: 0.78rem;
   font-weight: 600;
   color: #374151;
 }
@@ -578,10 +575,10 @@
 .form-group input,
 .form-group textarea {
   width: 100%;
-  padding: 0.5rem 0.75rem;
+  padding: 0.4rem 0.65rem;
   border: 2px solid #e5e7eb;
-  border-radius: 10px;
-  font-size: 0.9rem;
+  border-radius: 8px;
+  font-size: 0.82rem;
   background: #fff;
   color: #1e293b;
   transition: border-color 0.2s;
@@ -623,12 +620,12 @@
 .option-pill {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
-  padding: 0.35rem 0.7rem;
+  gap: 0.3rem;
+  padding: 0.28rem 0.6rem;
   border: 2px solid #e5e7eb;
   border-radius: 50px;
   background: #fff;
-  font-size: 0.82rem;
+  font-size: 0.76rem;
   font-weight: 600;
   color: #374151;
   cursor: pointer;
@@ -675,8 +672,8 @@
 [data-theme="dark"] .qty-control { border-color: #334155; }
 
 .qty-control button {
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   background: #f8fafc;
   border: none;
   cursor: pointer;
@@ -696,14 +693,14 @@
 .qty-control button:hover { background: #D4AF37; color: #000; }
 
 .qty-control span {
-  min-width: 36px;
+  min-width: 30px;
   text-align: center;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 700;
   color: #1e293b;
   background: #fff;
-  height: 32px;
-  line-height: 32px;
+  height: 28px;
+  line-height: 28px;
   border-left: 2px solid #e5e7eb;
   border-right: 2px solid #e5e7eb;
 }
@@ -719,36 +716,76 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.75rem 1rem;
+  padding: 0.5rem 0.75rem;
   background: linear-gradient(135deg, rgba(212, 175, 55, 0.08), rgba(184, 134, 11, 0.05));
   border: 2px solid rgba(212, 175, 55, 0.25);
-  border-radius: 12px;
+  border-radius: 10px;
   font-weight: 600;
   color: #374151;
+  font-size: 0.85rem;
 }
 
 [data-theme="dark"] .order-total-bar { color: #94a3b8; }
 
 .total-amount {
-  font-size: 1.4rem;
+  font-size: 1.1rem;
   font-weight: 800;
   color: #D4AF37;
 }
 
 .submit-order-btn {
   width: 100%;
-  padding: 0.7rem;
-  font-size: 1rem;
-  border-radius: 12px;
+  padding: 0.6rem;
+  font-size: 0.9rem;
+  border-radius: 10px;
 }
 
 .btn-full { width: 100%; }
 
+.form-step-actions {
+  margin-top: 0.5rem;
+}
+
+.form-step-actions-row {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.back-step-btn {
+  padding: 0.6rem 1rem;
+  border-radius: 10px;
+  background: #f1f5f9;
+  color: #475569;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.back-step-btn:hover {
+  background: #e2e8f0;
+}
+
+[data-theme="dark"] .back-step-btn {
+  background: #334155;
+  color: #cbd5e1;
+}
+
+[data-theme="dark"] .back-step-btn:hover {
+  background: #475569;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
 .order-note {
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   color: #94a3b8;
   text-align: center;
-  line-height: 1.5;
+  line-height: 1.4;
+  margin-top: -0.15rem;
 }
 
 /* ─────────────────────────────────────────

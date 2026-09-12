@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Users, Cross, Target, Star, ArrowRight, Calendar, Heart, Sparkles, MapPin, Clock, ArrowUpRight } from 'lucide-react';
 import { churchInfo, bishopsDeclaration, aboutContent, leadership, ministries, faqData } from '../data/content';
+import JoinModal from '../components/JoinModal';
 import './Home.css';
 import heroImg1 from '../images/Praise1.jpg';
 import heroImg2 from '../images/Praise2.jpg';
@@ -14,6 +16,7 @@ import churchImg from '../images/behind_church.jpg';
 
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [joinModalDept, setJoinModalDept] = useState(null);
 
   const slides = [
     {
@@ -56,13 +59,17 @@ const Home = () => {
 
   const stats = [
     { icon: Users, value: "200+", label: "Youth Reached" },
-    { icon: Cross, value: "8", label: "Ministries" },
+    { icon: Cross, value: "9", label: "Departments" },
     { icon: Target, value: "100K", label: "Souls to Win" },
     { icon: Star, value: "2026", label: "Year of Gratitude" }
   ];
 
   return (
     <div className="home">
+      <Helmet>
+        <title>Generation of Value (GOV) | Youth Ministry – Praise Christian Centre Matero</title>
+        <meta name="description" content="Generation of Value (GOV) is the official youth ministry of Praise Christian Centre Matero, Zambia. Raising purpose-driven, spiritually mature young people for Christ's kingdom." />
+      </Helmet>
       {/* Hero Section */}
       <section className="hero">
         <div className="hero-carousel">
@@ -318,7 +325,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Ministries Section */}
+      {/* Departments Section */}
       <section className="section ministries-preview" id="ministries">
         <div className="container">
           <motion.div
@@ -328,7 +335,7 @@ const Home = () => {
             viewport={{ once: true }}
           >
             <span className="section-badge">Serve With Us</span>
-            <h2 className="section-title">Our Ministries</h2>
+            <h2 className="section-title">Our Departments</h2>
             <p className="section-subtitle">Find your place to serve and grow</p>
           </motion.div>
 
@@ -347,9 +354,9 @@ const Home = () => {
                 </div>
                 <h3>{ministry.name}</h3>
                 <p>{ministry.description}</p>
-                <a href="/contact" className="ministry-join-btn">
+                <button onClick={() => setJoinModalDept(ministry.name)} className="ministry-join-btn">
                   Join <ArrowUpRight size={14} />
-                </a>
+                </button>
               </motion.div>
             ))}
           </div>
@@ -484,6 +491,12 @@ const Home = () => {
           </motion.div>
         </div>
       </section>
+
+      <JoinModal 
+        isOpen={!!joinModalDept} 
+        onClose={() => setJoinModalDept(null)} 
+        department={joinModalDept} 
+      />
     </div>
   );
 };

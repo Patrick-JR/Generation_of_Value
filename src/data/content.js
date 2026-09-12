@@ -107,44 +107,49 @@ export const leadership = {
 
 export const ministries = [
   {
-    name: "Praise & Worship Ministry",
+    name: "Praise & Worship Department",
     description: "Responsible for worship, praise sessions, and musical administration.",
     icon: "music"
   },
   {
-    name: "Creative Arts Ministry",
-    description: "Handles design, branding, photography, videography, media creativity, and visual storytelling.",
+    name: "Creative Arts Department",
+    description: "Nurtures and develops the creative talents and gifts of the church.",
     icon: "palette"
   },
   {
-    name: "Media Ministry",
-    description: "Responsible for technical media operations, projections, sound, recordings, and digital communication.",
+    name: "Media Department",
+    description: "Responsible for taking photos, making posters, and media production.",
     icon: "video"
   },
   {
-    name: "Publicity Ministry",
-    description: "Handles communication, promotions, posters, announcements, and public awareness.",
+    name: "Publicity Department",
+    description: "Handles promotions, announcements, and public awareness.",
     icon: "megaphone"
   },
   {
-    name: "Ushers Ministry",
-    description: "Responsible for order, hospitality, seating, and welcoming attendees.",
+    name: "Ushers Department",
+    description: "Responsible for hospitality, seating, and welcoming attendees.",
     icon: "users"
   },
   {
-    name: "Intercessory Prayer Ministry",
-    description: "Focuses on prayer, spiritual warfare, intercession, and spiritual support.",
+    name: "Intercession & Prayer Department",
+    description: "Focuses on prayer, intercession, and spiritual support.",
     icon: "heart"
   },
   {
-    name: "Sports & Recreation Ministry",
-    description: "Encourages fellowship, bonding, and wellness through sports and activities.",
+    name: "Sports Department",
+    description: "Encourages fellowship and wellness through sports and activities.",
     icon: "trophy"
   },
   {
-    name: "Logistics Ministry",
-    description: "Responsible for setup, transportation, organization, and event operational support.",
+    name: "Logistics Department",
+    description: "Responsible for setup, organization, and operational support.",
     icon: "truck"
+  },
+  {
+    name: "Evangelism Department",
+    description: "Dedicated to soul-winning and community outreach programs.",
+    icon: "map"
   }
 ];
 

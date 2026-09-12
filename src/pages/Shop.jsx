@@ -1,14 +1,15 @@
 import { useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ShoppingBag, Heart, Eye, Search, X, Phone, Send, Check, Plus, Minus, User, MessageSquare, CheckCircle } from 'lucide-react';
 import { shopProducts, churchInfo } from '../data/content';
 import { submitOrder } from '../services/api';
 import './Shop.css';
-import heroImg from '../images/GOV_Shirt.jpg';
-import golfTshirt from '../images/GOV_Shirt.jpg';
+import heroImg from '../Products/shop-hero-photo.jpeg';
 import servingGodHoodie from '../images/Serving_God_hoodie.jpg';
 
 // New products images
+import govTShirt from '../Products/gov-t_shirt.jpeg';
 import hoodieServing from '../Products/hoodie-serving.png';
 import shirtServing from '../Products/Shirt-Serving.png';
 import shirtRooted from '../Products/rooted-T-shirt.png';
@@ -24,7 +25,7 @@ import bagRooted from '../Products/Rooted-school-bug.png';
 
 // Map product image keys to real imported images
 const productImages = {
-  golf_tshirt: golfTshirt,
+  golf_tshirt: govTShirt,          // GOV T-Shirt
   serving_god_hoodie: servingGodHoodie,
   hoodie_serving: hoodieServing,
   shirt_serving: shirtServing,
@@ -38,9 +39,9 @@ const productImages = {
   tote_rooted: toteRooted,
   bag_serving: bagServing,
   bag_rooted: bagRooted,
-  skin: servingGodHoodie, // placeholder
-  cap: golfTshirt, // placeholder
-  wristband: servingGodHoodie, // placeholder
+  skin: servingGodHoodie,
+  cap: hoodieServing,
+  wristband: servingGodHoodie,
 };
 
 const Shop = () => {
@@ -60,6 +61,7 @@ const Shop = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [apiError, setApiError] = useState('');
+  const [formStep, setFormStep] = useState(1);
 
   // Open order form for a product
   const handleBuyNow = (product) => {
@@ -70,6 +72,7 @@ const Shop = () => {
     setOrderForm({ name: '', phone: '', message: '' });
     setErrors({});
     setIsSubmitted(false);
+    setFormStep(1);
   };
 
   const closeOrderForm = () => {
@@ -94,6 +97,20 @@ const Shop = () => {
     return Object.keys(e).length === 0;
   };
 
+  const buildWhatsAppMsg = () =>
+    `Hello GOV Shop! 👋\n\n` +
+    `🛍️ *Order Request*\n` +
+    `----------------------------\n` +
+    `*Product:* ${orderProduct.name}\n` +
+    `*Color:* ${selectedColor}\n` +
+    `*Size:* ${selectedSize}\n` +
+    `*Qty:* ${quantity}\n` +
+    `*Total:* K${orderProduct.price * quantity}\n` +
+    `----------------------------\n` +
+    `*Name:* ${orderForm.name}\n` +
+    `*Phone:* ${orderForm.phone}\n` +
+    (orderForm.message ? `*Note:* ${orderForm.message}\n` : '');
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validate()) return;
@@ -101,8 +118,11 @@ const Shop = () => {
     setIsSubmitting(true);
     setApiError('');
 
+    // Always open WhatsApp regardless of backend status
+    const msg = buildWhatsAppMsg();
+
     try {
-      // 1. Send to Backend
+      // Attempt to record order in backend (non-blocking)
       await submitOrder({
         product: { id: orderProduct.id, name: orderProduct.name, price: orderProduct.price },
         color: selectedColor,
@@ -110,29 +130,13 @@ const Shop = () => {
         quantity,
         customer: { name: orderForm.name, phone: orderForm.phone, message: orderForm.message }
       });
-
-      // 2. Build WhatsApp message (fallback/human touch)
-      const msg =
-        `Hello GOV Shop! 👋\n\n` +
-        `🛍️ *Order Request*\n` +
-        `----------------------------\n` +
-        `*Product:* ${orderProduct.name}\n` +
-        `*Color:* ${selectedColor}\n` +
-        `*Size:* ${selectedSize}\n` +
-        `*Qty:* ${quantity}\n` +
-        `*Total:* K${orderProduct.price * quantity}\n` +
-        `----------------------------\n` +
-        `*Name:* ${orderForm.name}\n` +
-        `*Phone:* ${orderForm.phone}\n` +
-        (orderForm.message ? `*Note:* ${orderForm.message}\n` : '');
-
-      window.open(`https://wa.me/260573351036?text=${encodeURIComponent(msg)}`, '_blank');
-      setIsSubmitted(true);
-    } catch (err) {
-      setApiError(err.message);
-    } finally {
-      setIsSubmitting(false);
+    } catch {
+      // Backend unavailable — still proceed to WhatsApp
     }
+
+    window.open(`https://wa.me/260573351036?text=${encodeURIComponent(msg)}`, '_blank');
+    setIsSubmitted(true);
+    setIsSubmitting(false);
   };
 
   // Filter & sort
@@ -150,6 +154,10 @@ const Shop = () => {
 
   return (
     <div className="shop-page">
+      <Helmet>
+        <title>GOV Shop – GOV Merchandise | Generation of Value</title>
+        <meta name="description" content="Shop official Generation of Value (GOV) merchandise — hoodies, t-shirts, tote bags, notebooks, phone pouches and more. Represent the Kingdom with GOV apparel." />
+      </Helmet>
 
       {/* ── Hero ── */}
       <section className="shop-hero">
@@ -407,67 +415,80 @@ const Shop = () => {
                   </div>
 
                   <form onSubmit={handleSubmit} className="order-form" noValidate>
-                    <div className="form-section-label">Select Options</div>
+                    {formStep === 1 ? (
+                      <>
+                        <div className="form-section-label">Select Options</div>
 
-                    {/* Color */}
-                    <div className="form-group">
-                      <label>Colour</label>
-                      <div className="option-pills">
-                        {orderProduct.colors.map(c => (
-                          <button
-                            key={c}
-                            type="button"
-                            className={`option-pill ${selectedColor === c ? 'selected' : ''}`}
-                            onClick={() => setSelectedColor(c)}
+                        {/* Color */}
+                        <div className="form-group">
+                          <label>Colour</label>
+                          <div className="option-pills">
+                            {orderProduct.colors.map(c => (
+                              <button
+                                key={c}
+                                type="button"
+                                className={`option-pill ${selectedColor === c ? 'selected' : ''}`}
+                                onClick={() => setSelectedColor(c)}
+                              >
+                                <span className={`color-dot-sm color-dot-${c.toLowerCase()}`} />
+                                {c}
+                                {selectedColor === c && <Check size={13} />}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Size */}
+                        <div className="form-group">
+                          <label>Size</label>
+                          <div className="option-pills">
+                            {orderProduct.sizes.map(s => (
+                              <button
+                                key={s}
+                                type="button"
+                                className={`option-pill ${selectedSize === s ? 'selected' : ''}`}
+                                onClick={() => setSelectedSize(s)}
+                              >
+                                {s}
+                                {selectedSize === s && <Check size={13} />}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Quantity */}
+                        <div className="form-group">
+                          <label>Quantity</label>
+                          <div className="qty-control">
+                            <button type="button" onClick={() => setQuantity(Math.max(1, quantity - 1))}>
+                              <Minus size={16} />
+                            </button>
+                            <span>{quantity}</span>
+                            <button type="button" onClick={() => setQuantity(quantity + 1)}>
+                              <Plus size={16} />
+                            </button>
+                          </div>
+                        </div>
+                        
+                        <div className="form-step-actions">
+                          <button 
+                            type="button" 
+                            className="btn btn-primary btn-full next-step-btn"
+                            onClick={() => setFormStep(2)}
                           >
-                            <span className={`color-dot-sm color-dot-${c.toLowerCase()}`} />
-                            {c}
-                            {selectedColor === c && <Check size={13} />}
+                            Next Step
                           </button>
-                        ))}
-                      </div>
-                    </div>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <div className="form-section-label">Your Details</div>
 
-                    {/* Size */}
-                    <div className="form-group">
-                      <label>Size</label>
-                      <div className="option-pills">
-                        {orderProduct.sizes.map(s => (
-                          <button
-                            key={s}
-                            type="button"
-                            className={`option-pill ${selectedSize === s ? 'selected' : ''}`}
-                            onClick={() => setSelectedSize(s)}
-                          >
-                            {s}
-                            {selectedSize === s && <Check size={13} />}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Quantity */}
-                    <div className="form-group">
-                      <label>Quantity</label>
-                      <div className="qty-control">
-                        <button type="button" onClick={() => setQuantity(Math.max(1, quantity - 1))}>
-                          <Minus size={16} />
-                        </button>
-                        <span>{quantity}</span>
-                        <button type="button" onClick={() => setQuantity(quantity + 1)}>
-                          <Plus size={16} />
-                        </button>
-                      </div>
-                    </div>
-
-                    <div className="form-divider" />
-                    <div className="form-section-label">Your Details</div>
-
-                    {/* Name */}
-                    <div className="form-group">
-                      <label htmlFor="order-name">
-                        <User size={14} /> Full Name *
-                      </label>
+                        {/* Name */}
+                        <div className="form-group">
+                          <label htmlFor="order-name">
+                            <User size={14} /> Full Name *
+                          </label>
                       <input
                         id="order-name"
                         type="text"
@@ -515,20 +536,31 @@ const Shop = () => {
                       <span className="total-amount">K{orderProduct.price * quantity}</span>
                     </div>
 
-                    {apiError && (
-                      <div className="field-error" style={{ textAlign: 'center', margin: '0.5rem 0' }}>
-                        {apiError}
-                      </div>
+                        {apiError && (
+                          <div className="field-error" style={{ textAlign: 'center', margin: '0.5rem 0' }}>
+                            {apiError}
+                          </div>
+                        )}
+
+                        <div className="form-step-actions-row">
+                          <button 
+                            type="button" 
+                            className="btn btn-secondary back-step-btn"
+                            onClick={() => setFormStep(1)}
+                          >
+                            Back
+                          </button>
+                          <button type="submit" className="btn btn-primary submit-order-btn flex-1" disabled={isSubmitting}>
+                            <Send size={18} />
+                            {isSubmitting ? 'Processing...' : 'Send Order via WhatsApp'}
+                          </button>
+                        </div>
+
+                        <p className="order-note">
+                          This will open WhatsApp with your order details pre-filled. Our team will confirm payment instructions.
+                        </p>
+                      </>
                     )}
-
-                    <button type="submit" className="btn btn-primary btn-full submit-order-btn" disabled={isSubmitting}>
-                      <Send size={18} />
-                      {isSubmitting ? 'Processing...' : 'Send Order via WhatsApp'}
-                    </button>
-
-                    <p className="order-note">
-                      This will open WhatsApp with your order details pre-filled. Our team will confirm payment instructions.
-                    </p>
                   </form>
                 </>
               )}
