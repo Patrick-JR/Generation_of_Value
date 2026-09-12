@@ -8,7 +8,7 @@ import img2 from '../images/Praise1.jpg';
 import img3 from '../images/Praise2.jpg';
 import img4 from '../images/Rooted.jpg';
 import img5 from '../images/House_of_miracles.jpg';
-import img6 from '../images/behind 1.jpg';
+import img6 from '../images/behind_church.jpg';
 import img7 from '../images/behind_church.jpg';
 import img8 from '../images/open_bible.JPG';
 

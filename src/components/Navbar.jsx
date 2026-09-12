@@ -7,7 +7,7 @@ import pccLogo from '../images/PCC_Logo.png';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'light');
+  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark');
   const location = useLocation();
 
   useEffect(() => {

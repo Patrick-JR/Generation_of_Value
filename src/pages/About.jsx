@@ -4,7 +4,7 @@ import { Cross, Target, Eye, Heart, Sparkles, Quote, ArrowRight, Users, BookOpen
 import { churchInfo, bishopsDeclaration, aboutContent } from '../data/content';
 import './About.css';
 import heroImg from '../images/Praise1.jpg';
-import fellowshipImg from '../images/House_of_miracles.jpg';
+import fellowshipImg from '../images/Praise2.jpg';
 import churchImg from '../images/behind_church.jpg';
 
 const About = () => {

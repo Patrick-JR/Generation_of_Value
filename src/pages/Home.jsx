@@ -7,9 +7,9 @@ import './Home.css';
 import heroImg1 from '../images/Praise1.jpg';
 import heroImg2 from '../images/Praise2.jpg';
 import heroImg3 from '../images/behind_church.jpg';
-import youthWorshipImg from '../images/Praise2.jpg';
+import youthWorshipImg from '../images/Luckson.jpg';
 import bishopDeclImg from '../images/Mr_and_Mrs_Bishop.jpg';
-import bishopKarongaImg from '../images/Bishop_Karonga.jpg';
+import bishopKarongaImg from '../images/Mr_and_Mrs_Bishop3.jpg';
 import churchImg from '../images/behind_church.jpg';
 
 const Home = () => {
